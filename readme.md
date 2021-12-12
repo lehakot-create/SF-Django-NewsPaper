@@ -63,6 +63,25 @@ a = Author.objects.all()[1]
 Author.update_rating(author = a)
 
 9
+a = Author.objects.order_by('-rating').first().full_name_id
+User.objects.filter(id = a).values('username')[0]['username']
+
+10
+p = Post.objects.order_by('-rating').first()
+p.date_time
+User.objects.filter(id = p.author_id).values('username')[0]['username']
+p.rating
+p.title
+p.preview()
+
+11
+ p_id = Post.objects.order_by('-rating').first().id
+Comment.objects.filter(post_id = p_id).values('date_time')
+Comment.objects.filter(post_id = p_id).values('user_id')
+Comment.objects.filter(post_id = p_id).values('rating')
+Comment.objects.filter(post_id = p_id).values('text')
+
+
 
 
 

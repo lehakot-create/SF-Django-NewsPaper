@@ -1,10 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models import Sum
-
-
-class UserRating(models.Model):
-    rating = models.IntegerField(User, default=0)
+from django.db.models import Sum, Max
 
 
 class Author(models.Model):
@@ -57,6 +53,8 @@ class Post(models.Model):
         self.save()
 
     def preview(self):
+        if len(self.text) < 124:
+            return f'{self.text}'
         return f'{self.text[124]}...'
 
 
@@ -71,3 +69,11 @@ class Comment(models.Model):
     text = models.TextField()
     date_time = models.DateTimeField(auto_now_add=True)
     rating = models.IntegerField(default=0)
+
+    def like(self):
+        self.rating += 1
+        self.save()
+
+    def dislike(self):
+        self.rating -= 1
+        self.save()
