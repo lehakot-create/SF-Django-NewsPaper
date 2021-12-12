@@ -1,68 +1,22 @@
-from news.models import *
+Описание проекта Новостной портал
+
+Проект в котором собраны новости с разным сайтов
 
 
-1
-User.objects.create_user('bob')
-User.objects.create_user('jack')
-
-2
-Author.objects.create(full_name=User.objects.all()[0])
-Author.objects.create(full_name=User.objects.all()[1])
-
-3
-Category.objects.create(name_cat='Экономика')
-Category.objects.create(name_cat='Криминал')
-Category.objects.create(name_cat='Политика')
-Category.objects.create(name_cat='Юмор')
-
-4 и 5
-a = Author.objects.all()[0]
-cat = Category.objects.all()[0]
-post = Post.objects.create(author=a, choices='Article',title='ЦБ повысил ставку',text='Сегодня Центральный Банк РФ повысил ключевую ставку до 360%')
-post.category.add(cat)
-
-a = Author.objects.all()[0]
-cat = Category.objects.all()[1]
-post = Post.objects.create(author=a, choices='News',title='Программа максимум:  показать все что скрыто', text='Внимание! Внимание! Сегодня под мостом нашли Гитлера с хвостом')
-post.category.add(cat)
-
-a = Author.objects.all()[1]
-cat = Category.objects.all()[3]
-post = Post.objects.create(author=a, choices='Article',title='Анекдот', text='Колобок повесился. Буратино утопился.')
-post.category.add(cat)
-cat2 = Category.objects.all()[2]
-post.category.add(cat2)
-
-6
-post = Post.objects.all()[3]
-user = User.objects.all()[0]
-Comment.objects.create(post=post, user=user, text='Афтар жжот')
-
-post = Post.objects.all()[4]
-user = User.objects.all()[1]
-Comment.objects.create(post=post, user=user, text='Ацтой')
-
-post = Post.objects.all()[5]
-user = User.objects.all()[0]
-Comment.objects.create(post=post, user=user, text='На троечку')
-
-post = Post.objects.all()[5]
-user = User.objects.all()[1]
-Comment.objects.create(post=post, user=user, text='Я твой дом труба шатал, я твой сад калитка хлопал')
-
-7
-Post.objects.all()[0].like()
-Post.objects.all()[1].like()
-Post.objects.all()[2].dislike()
-
-8
-from news.models import *
-a = Author.objects.all()[0]
-Author.update_rating(author = a)
-a = Author.objects.all()[1]
-Author.update_rating(author = a)
-
-9
+1. На главной странице показаны последние 10 новостей
+2. Есть возможность добавления комментариев
+3. Добавлять, редактировать и удалять новости могут только авторы
+4. Есть поиск по новостям
+5. Есть возможность выбирать новости по категориям
+6. Реализована возможность авторизации через Google-аккаунт
+7. Реализована возможность подписаться/отписаться от новостей
+8. Если пользователь подписан на какую-либо категорию, то, как только в неё добавляется новая статья, её краткое содержание приходит пользователю на электронную почту, которую он указал при регистрации.
+9. Подтверждение регистрации по email
+10. Установлено ограничение на 3 новости в сутки
+11. Если пользователь подписан на какую-либо категорию, то каждую неделю ему приходит на почту список новых статей, появившихся за неделю
+12. Автоматический сбор новостей - ежедневно в 12:00
 
 
 
+Задачи запускаются вручную.
+Для этого нужно в консоле пишем: py manage.py runapscheduler

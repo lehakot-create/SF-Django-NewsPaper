@@ -1,0 +1,32 @@
+{% extends 'default.html' %}
+
+{% block title %}{% endblock title %}
+
+
+{% block navigation %}
+<li class="nav-item"><a class="nav-link" href="{% url 'news_list' %}">News</a></li>
+{% endblock navigation%}
+
+
+{% block content %}
+<h4> Количество всех новостей: {{ filter.qs | length }}</h4>
+<form method="GET">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <td>{{ filter.form }}</td>
+        </tr>
+    </table>
+    <input type="submit" value="Find"/>
+</form>
+
+{% if filter.qs|length %}
+    {% for post in filter.qs %}
+        <a href="{{ post.get_absolute_url }}" target="_blank">{{ post.text }}</a>
+        <br>
+    {% endfor %}
+{% else %}
+    <p>Ничего не найдено</p>
+{% endif %}
+
+{% endblock content %}

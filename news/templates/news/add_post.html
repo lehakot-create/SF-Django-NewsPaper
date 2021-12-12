@@ -1,0 +1,15 @@
+{% extends 'default.html' %}
+
+
+
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>{{ form }}</td>
+            </tr>
+        </table>
+        <input type="submit" value="Add news">
+    </form>
+{% endblock content %}

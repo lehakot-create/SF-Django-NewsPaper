@@ -1,0 +1,21 @@
+{% extends 'default.html' %}
+
+{% load custom_filters %}
+
+{% block content %}
+<div class="card">
+    <h5 class="card-header">{{ post.date_time|date:'d.m.Y H:m'}}</h5>
+
+    <div class="card-body">
+        <h5 class="card-title">{{ post.title | bad_word }}</h5>
+        <p class="card-text">{{ post.text | bad_word }}</p>
+    </div>
+</div>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Удалить">
+</form>
+
+{% endblock content %}

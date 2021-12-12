@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>Здравствуйте, {{ user }}!</p>
+<p>Новая статья в твоем любимом разделе - {{ category }}</p>
+{{ post.title }}
+{{ post.text|truncatewords:50}}
+
+<p>Вы получили это письмо потому что подписаны на новости категории {{ category}}</p>
+<p>Чтобы отписаться - перейдите по <a href="{% url 'unsubscribe' post.id %}">ссылке</a></p>
+</body>
+</html>
