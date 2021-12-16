@@ -1,0 +1,20 @@
+{% extends 'default.html' %}
+
+{% load custom_filters %}
+
+{% block title %}
+News
+{% endblock title%}
+
+{% block content %}
+<h3><a href="{{post.url}}" target='_blank'>{{ post.title | bad_word }}</a></h3>
+<hr>
+<p>{{ post.date_time|date:'d.m.Y h:m' }}</p>
+<p>{{ post.text | bad_word }}</p>
+<p>Рейтинг: {{ post.rating }}</p>
+<p>Автор: {{ post.author }}</p>
+<p>Комментарии:</p>
+{% for comm in comment %}
+    <p>{{ comm.user_id }}: {{ comm.text | bad_word }}</p>
+{% endfor %}
+{% endblock content %}

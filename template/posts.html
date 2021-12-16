@@ -1,0 +1,25 @@
+{% extends 'default.html' %}
+
+{% load custom_filters %}
+
+{% block title %}
+News
+{% endblock title%}
+
+{% block content %}
+<h1>Все новости</h1>
+<hr>
+<h4> Количество всех новостей: {{ posts|length }}</h4>
+{% if posts %}
+    {% for post in posts %}
+        <h4><a href="{{ post.get_absolute_url }}" target='_blank'>{{ post.title | bad_word }}</a></h4>
+        <p>{{ post.date_time|date:'d.m.Y'}}</p>
+        <p>{{ post.text | truncatewords:20 | bad_word }}</p>
+        <p>Категории: {% for cat in post.category.all %}
+            {{ cat }}
+            {% endfor %}</p>
+    {% endfor %}
+{% else %}
+    <p>Новостей нет</p>
+{% endif%}
+{% endblock content %}

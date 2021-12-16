@@ -4,6 +4,8 @@ from news.models import *
 1
 User.objects.create_user('bob')
 User.objects.create_user('jack')
+User.objects.create_user('jully')
+User.objects.create_user('jenny')
 
 2
 Author.objects.create(full_name=User.objects.all()[0])
@@ -34,19 +36,19 @@ cat2 = Category.objects.all()[2]
 post.category.add(cat2)
 
 6
-post = Post.objects.all()[3]
+post = Post.objects.all()[0]
 user = User.objects.all()[0]
 Comment.objects.create(post=post, user=user, text='Афтар жжот')
 
-post = Post.objects.all()[4]
+post = Post.objects.all()[1]
 user = User.objects.all()[1]
 Comment.objects.create(post=post, user=user, text='Ацтой')
 
-post = Post.objects.all()[5]
+post = Post.objects.all()[1]
 user = User.objects.all()[0]
 Comment.objects.create(post=post, user=user, text='На троечку')
 
-post = Post.objects.all()[5]
+post = Post.objects.all()[2]
 user = User.objects.all()[1]
 Comment.objects.create(post=post, user=user, text='Я твой дом труба шатал, я твой сад калитка хлопал')
 
@@ -56,7 +58,6 @@ Post.objects.all()[1].like()
 Post.objects.all()[2].dislike()
 
 8
-from news.models import *
 a = Author.objects.all()[0]
 Author.update_rating(author = a)
 a = Author.objects.all()[1]
@@ -75,7 +76,7 @@ p.title
 p.preview()
 
 11
- p_id = Post.objects.order_by('-rating').first().id
+p_id = Post.objects.order_by('-rating').first().id
 Comment.objects.filter(post_id = p_id).values('date_time')
 Comment.objects.filter(post_id = p_id).values('user_id')
 Comment.objects.filter(post_id = p_id).values('rating')
