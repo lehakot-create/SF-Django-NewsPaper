@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import Sum, Max
+from django.shortcuts import reverse
 
 
 class Author(models.Model):
@@ -54,6 +55,9 @@ class Category(models.Model):
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
 
+    def get_absolute_url(self):
+        return f'category/{self.pk}'
+
 
 class Post(models.Model):
     article = 'Article'
@@ -64,7 +68,7 @@ class Post(models.Model):
     ]
     author = models.ForeignKey('Author', on_delete=models.CASCADE, verbose_name='Автор')  # , related_name='posts')
     choices = models.CharField(max_length=7, choices=choice, default=article, verbose_name='Тип')
-    date_time = models.DateTimeField(auto_now_add=True)
+    date_time = models.DateTimeField(auto_now_add=True)  # (blank=True, null=True)
     category = models.ManyToManyField('Category', through='PostCategory')
     title = models.CharField(max_length=255, unique=True, verbose_name='Заголовок')
     text = models.TextField(max_length=255, verbose_name='Текст новости')
@@ -92,7 +96,7 @@ class Post(models.Model):
         verbose_name_plural = 'Посты'
 
     def get_absolute_url(self):
-        return f'{self.pk}'
+        return f'/news/{self.id}'
 
 
 class PostCategory(models.Model):

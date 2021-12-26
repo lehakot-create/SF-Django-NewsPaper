@@ -1,0 +1,72 @@
+{% extends 'default.html' %}
+
+{% load custom_filters %}
+
+{% block title %}
+News
+{% endblock title%}
+
+{% block navigation %}
+    <li class="nav-item"><a class="nav-link" href="{% url 'search' %}">Find</a></li>
+{% endblock navigation %}
+
+{% block content %}
+<ul>
+    <li>Сделать слева список категорий</li>
+    <li>Реализовать возможность добавления комментариев на странице новости</li>
+
+</ul>
+
+    <h1>Все новости</h1>
+    <hr>
+{% if posts %}
+    {% for post in posts %}
+        <div class="card">
+            <h5 class="card-header">{{ post.date_time|date:'d.m.Y'}}</h5>
+          <div class="card-body">
+            <h5 class="card-title"><a href="{% url 'news_detail' post.id %}">{{ post.title | bad_word }}</a></h5>
+            <p class="card-text">{{ post.text | truncatewords:20 | bad_word }}</p>
+          </div>
+        </div>
+        <div class="card-footer mb-3 text-muted">
+            <p>Категории: {% for cat in post.category.all %}
+                            <a href="{{ cat.get_absolute_url }}">{{ cat }}</a>
+                            {% endfor %}</p>
+            <a href="{% url 'update_post' post.id %}">Редактировать</a>
+            <a href="{% url 'delete_post' post.id %}">Удалить</a>
+        </div>
+            {% endfor %}
+
+{% else %}
+    <p>Новостей нет</p>
+{% endif %}
+
+{% endblock content %}
+
+
+
+<!--{% if is_paginated %}
+
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+          {% if page_obj.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+          {% endif %}
+
+          {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+                <li class="page-item"><a class="page-link" href="{{ num }}">{{ num }}</a></li>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+            {% endif %}
+          {% endfor %}
+
+          {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last</a></li>
+          {% endif %}
+      </ul>
+    </nav>
+
+{% endif %}-->

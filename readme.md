@@ -1,3 +1,4 @@
+python manage.py shell
 from news.models import *
 
 
@@ -10,12 +11,19 @@ User.objects.create_user('jenny')
 2
 Author.objects.create(full_name=User.objects.all()[0])
 Author.objects.create(full_name=User.objects.all()[1])
+Author.objects.create(full_name=User.objects.get(id=18))
 
 3
-Category.objects.create(name_cat='Экономика')
-Category.objects.create(name_cat='Криминал')
-Category.objects.create(name_cat='Политика')
-Category.objects.create(name_cat='Юмор')
+
+Category.objects.create(name_cat='45.ru')
+Category.objects.create(name_cat='74.ru')
+Category.objects.create(name_cat='angi.ru')
+Category.objects.create(name_cat='neftegaz.ru')
+Category.objects.create(name_cat='ria.ru')
+Category.objects.create(name_cat='ria56')
+Category.objects.create(name_cat='sarnovosti.ru')
+Category.objects.create(name_cat='Tatar_inform')
+Category.objects.create(name_cat='ufa1')
 
 4 и 5
 a = Author.objects.all()[0]
@@ -85,4 +93,7 @@ Comment.objects.filter(post_id = p_id).values('text')
 
 
 
+post = Post.objects.create(author=Author.objects.get(id=2), choices='News',title='GПрограмма максимум:  показать все что скрыто', text='GВнимание! Внимание! Сегодня под мостом нашли Гитлера с хвостом', url='http://')
 
+
+Post.objects.get(id=1)
