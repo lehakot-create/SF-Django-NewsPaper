@@ -1,21 +1,21 @@
 from .models import Post
-from django_filters import FilterSet, DateFilter
+from django_filters import FilterSet, DateFilter, CharFilter
 from django.forms import DateInput
 
 
 class PostFilter(FilterSet):
-    # time_in = DateFilter(
-    #     lookup_expr='icontains',
-    #     widget=DateInput(
-    #         attrs={
-    #             'type': 'date'
-    #         }
-    #     )
-    # )
+    date_time = DateFilter(label='Дата больше чем:',
+        lookup_expr='gt',
+        widget=DateInput(
+            attrs={
+                'type': 'date'
+            }
+        )
+    )
+    title = CharFilter(label='Заголовок содержит:',
+                       lookup_expr='icontains')
 
     class Meta:
         model = Post
-        fields = {'date_time': ['gt'],
-                  'title': ['icontains'],
-                  'author': ['exact'],
-        }
+        fields = ['date_time', 'title', 'author']
+

@@ -18,7 +18,7 @@ News
         {% if comment != '-' %}
             <p>Комментарии:</p>
             {% for el in comment %}
-                <p>{{ el.user }}: {{ el.text | bad_word }}</p>
+                <p>{{ el.user__username }}: {{ el.text | bad_word }}</p>
             {% endfor %}
         {% endif %}
     </div>
@@ -30,9 +30,11 @@ News
     <p>Автор: {{ post.author }}</p>
 </div>
 
-
-
-
+ <form method="POST">
+     {% csrf_token %}
+     {{ form }}
+     <input type="submit" value="Add comment">
+ </form>
 {% endblock content %}
 
 

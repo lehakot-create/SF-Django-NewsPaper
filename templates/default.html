@@ -23,10 +23,21 @@
                         <li class="nav-item"><a class="nav-link" href="{% url 'add_post' %}">Add news</a></li>
                         {% block navigation %}
                         {% endblock navigation%}
-                        <!--<li class="nav-item"><a class="nav-link" href="{{ '../news/search/' }}">Find</a></li>-->
+
                         <!--<li class="nav-item"><a class="nav-link" href="#services">Services</a></li>-->
                         <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+
+                        {% if request.user.is_authenticated %}
+                            <a class="nav-link" href="{% url 'profile' user.id %}">Вы вошли как: {{ user.username }}</a>
+                            <button><a href="/accounts/logout/">Logout</a></button>
+                            {% block isauthor %}
+                            {% endblock isauthor %}
+                        {% else %}
+                            <a class="nav-link" href="">Вы вошли как Гость</a>
+                            <button><a href="/accounts/login/">Login</a></button>
+                        {% endif %}
                     </ul>
+
                 </div>
             </div>
         </nav>
@@ -40,6 +51,7 @@
             </div>
         </header>
         <!-- About section-->
+
         <section id="about">
             <div class="container px-4">
                 <div class="row gx-4 justify-content-center">
