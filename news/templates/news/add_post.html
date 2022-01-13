@@ -3,16 +3,13 @@
 
 
 {% block content %}
-
-<ul>
-    <li>Сделать красивую форму</li>
-
-</ul>
-
-<form method="POST">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Add news">
-</form>
-
+    <form method="POST">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>{{ form }}</td>
+            </tr>
+        </table>
+        <input type="submit" value="Add news">
+    </form>
 {% endblock content %}

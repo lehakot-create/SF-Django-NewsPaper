@@ -1,9 +1,8 @@
-from django.forms import ModelForm
 from .models import Post, Comment
-from datetime import datetime
-from django.forms import Form
-from django.forms import CharField, EmailField, IntegerField
-from django.forms import DateTimeField
+from django import forms
+from django.forms import CharField, EmailField, IntegerField, ModelForm
+from django.contrib.auth.models import Group, User
+from allauth.account.forms import SignupForm
 
 
 class PostForm(ModelForm):
@@ -22,7 +21,38 @@ class PostForm(ModelForm):
 
 
 class CommentForm(ModelForm):
+    text = CharField(label='Текст комментария:', max_length=256)
 
     class Meta:
         model = Comment
         fields = ['text']
+
+
+# class NewCommentForm(ModelForm):
+#     text = CharField(label='New comment:',
+#                      max_length=128)
+
+
+class BaseRegisterForm(SignupForm):
+
+    def save(self, request):
+        user = super(BaseRegisterForm, self).save(request)
+        group = Group.objects.get(name='common')
+        group.user_set.add(user)
+        return user
+
+
+class SignupForm(forms.ModelForm):
+
+    def signup(self, request, user):
+        group = Group.objects.get(name='common')
+        user.groups.add(group)
+        user.save()
+
+
+class UserProfileForm(ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'first_name', 'last_name',
+                  'email']
+

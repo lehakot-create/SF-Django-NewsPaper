@@ -10,11 +10,19 @@ News
     <li class="nav-item"><a class="nav-link" href="{% url 'search' %}">Find</a></li>
 {% endblock navigation %}
 
-{% block content %}
-<ul>
-    <li>Сделать слева список категорий</li>
-    <li>Реализовать возможность добавления комментариев на странице новости</li>
+{% block isauthor %}
+    {% if not is_author %}
+        <button><a href="{% url 'upgrade' %}">Стать автором</a></button>
+    {% endif %}
+{% endblock isauthor %}
 
+{% block content %}
+<h5>Категории:
+{% for cat in category %}
+    <a href="{% url 'category_list' cat.id %}">{{ cat.name_cat }}</a>
+{% endfor %}</h5>
+<ul>
+    <li>На странице поиска показывать только результаты запроса</li>
 </ul>
 
     <h1>Все новости</h1>
