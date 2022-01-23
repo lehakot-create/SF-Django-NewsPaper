@@ -12,4 +12,6 @@ urlpatterns = [
     path('<int:pk>/delete/', PostDeleteView.as_view(), name='delete_post'),
     path('upgrade/', upgrade, name='upgrade'),
     path('profile/<int:pk>/', ProfileDetailView.as_view(), name='profile'),
+    path('<int:pk>/subscribe/', subscribe, name='subscribe'),
+    path('<int:pk>/unsubscribe/', unsubscribe, name='unsubscribe'),
 ]

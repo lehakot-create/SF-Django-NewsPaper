@@ -1,0 +1,1547 @@
+<html>
+    <head>
+	    <title> </title>
+		<meta http-equiv="Content-Type" content="text/html; charset=windows-1251" charset="windows-1251" />
+						 
+										<link rel="apple-touch-icon-precomposed" sizes="57x57" href="/favicon/apple-touch-icon-57x57.png" />
+		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/favicon/apple-touch-icon-114x114.png" />
+		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/favicon/apple-touch-icon-72x72.png" />
+		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/favicon/apple-touch-icon-144x144.png" />
+		<link rel="apple-touch-icon-precomposed" sizes="60x60" href="/favicon/apple-touch-icon-60x60.png" />
+		<link rel="apple-touch-icon-precomposed" sizes="120x120" href="/favicon/apple-touch-icon-120x120.png" />
+		<link rel="apple-touch-icon-precomposed" sizes="76x76" href="/favicon/apple-touch-icon-76x76.png" />
+		<link rel="apple-touch-icon-precomposed" sizes="152x152" href="/favicon/apple-touch-icon-152x152.png" />
+		<link rel="icon" type="image/png" href="/favicon/favicon-196x196.png" sizes="196x196" />
+		<link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+		<link rel="icon" type="image/png" href="/favicon/favicon-32x32.png" sizes="32x32" />
+		<link rel="icon" type="image/png" href="/favicon/favicon-16x16.png" sizes="16x16" />
+		<link rel="icon" type="image/png" href="/favicon/favicon-128.png" sizes="128x128" />
+		<meta name="application-name" content=" "/>
+		<meta name="msapplication-TileColor" content="#FFFFFF" />
+		<meta name="msapplication-TileImage" content="/favicon/mstile-144x144.png" />
+		<meta name="msapplication-square70x70logo" content="/favicon/mstile-70x70.png" />
+		<meta name="msapplication-square150x150logo" content="/favicon/mstile-150x150.png" />
+		<meta name="msapplication-wide310x150logo" content="/favicon/mstile-310x150.png" />
+		<meta name="msapplication-square310x310logo" content="/favicon/mstile-310x310.png" />
+		<meta name="theme-color" content="#fff" />
+		<meta name="yandex-verification" content="26c3d67876f123c7" />
+				 
+		<link href="//fonts.googleapis.com/css?family=Roboto+Slab:400,700&subset=latin,cyrillic,cyrillic-ext" rel="stylesheet" type="text/css" />
+    	<link href="//fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css" />
+	     
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+		<link href="/templates/default/style/css/reset.css" media="screen" rel="stylesheet" type="text/css" />
+		<link href="/templates/default/style/css/style_bg_blue2019.css?080221" media="screen" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="/templates/default/style/css/print.css?161019" type="text/css" media="print" />
+		
+		 
+
+	    <link href="/templates/default/style/css/adaptive2019.css?180919" media="screen" rel="stylesheet" type="text/css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+		<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+		<script src="/templates/default/js/jquery-ui.min.js"></script>
+		<link rel="stylesheet" href="/templates/default/js/datepicker.css" />
+		<script src="/templates/default/js/datepicker-ru.js" charset="utf-8"></script>
+		<link rel="stylesheet" href="/templates/default/style/css/lightslider.css" />
+		<script src="/templates/default/js/lightslider.js"></script>
+		<script src="/templates/default/js/jquery.sticky-kit.min.js"></script>
+		<script src="/templates/default/js/scripts.js?040920" charset="utf-8"></script>
+<!-- Yandex.RTB -->
+<script>window.yaContextCb=window.yaContextCb||[]</script>
+<script src="https://yandex.ru/ads/system/context.js" async></script>
+						 		<script>
+						var lightning = true;
+					
+		function setLightning() {
+			$("table.lenta tr.usual").addClass("invisible");
+					
+					var i = 0;
+					$( "table.lenta tr.lightning" ).each(function( index ) {
+						if(!$(this).hasClass("daterow"))
+						i = i+1;
+						if(i > 10)
+							 $( this ).addClass("invisible");
+							
+					});
+		}
+		
+		function setUsual() {
+			var i = 0;
+					$( "table.lenta tr" ).each(function( index ) {
+						i = i+1;
+						if(i > 10)
+							 $( this ).addClass("invisible");
+							
+					});
+		}
+			 $(function() {
+	    
+				 $('#sandwichA').click(function(){
+					 $("#menuCell, #weatherCell").slideToggle(500);
+						$(this).toggleClass('open');
+					
+				});
+				
+				
+				$("input[name='lightning']").on('change', function() {
+		 
+				 if ($(this).is(':checked')) {
+					$.post("/json/lenta.php?usual=0").done();
+					$("table.lenta tr.usual").addClass("invisible");
+					setLightning();
+					lightning = true;
+				 } else {
+					 $.post("/json/lenta.php?usual=1").done();
+					$("table.lenta tr.usual").removeClass("invisible");
+					lightning = lightning = false;
+					setUsual();
+				 }
+			 });
+				
+				
+				if(lightning == true ) {
+					setLightning();
+					 
+				
+				} else {
+					
+					 setUsual();
+				
+				}
+				
+					 
+			});
+			
+			function showfeed2() {
+				if(lightning == true) {
+					var i = 0;
+					$( "table.lenta tr.lightning.invisible" ).each(function( index ) {
+						i = i+1;
+						if(i > 10)
+							$( this ).addClass("invisible");
+						else 
+							$( this ).removeClass("invisible");
+							
+					});
+					if(i == 0)
+						$("tr.button").css("display", "none");
+				} else {
+					var i = 0;
+					$( "table.lenta tr.lightning.invisible, tr.usual.invisible" ).each(function( index ) {
+						i = i+1;
+						if(i > 10)
+							$( this ).addClass("invisible");
+						else 
+							$( this ).removeClass("invisible");
+							
+					});
+					if(i == 0)
+						$("tr.button").css("display", "none");
+				}
+				
+			}
+		</script>
+			</head>
+	<body class="int">	
+ 
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(217420, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true,
+        trackHash:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/217420" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+ 
+
+<!--LiveInternet counter--><script type="text/javascript"><!--
+document.write("<a href='http://www.liveinternet.ru/click' "+
+"target=_blank><img src='//counter.yadro.ru/hit?t14.10;r"+
+escape(document.referrer)+((typeof(screen)=="undefined")?"":
+";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
+screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
+";"+Math.random()+
+"' alt='' title='LiveInternet:     24"+
+" ,   24    ' "+
+"border='0' width='1' height='1' align='right'><\/a>")
+//--></script><!--/LiveInternet-->
+ <div class="banner static top2"><noindex>
+						
+						 
+						<div class="resp-container">
+							 
+								<iframe src="/i/banners/shaldom_kv_dom/shaldom_kv_dom_4vsar1000x100_Canvas.html" frameborder="0" scrolling="no"></iframe>
+							
+						</div></noindex></div>	    <div id="header">
+		    <div class="block">
+			
+			<div class="table">
+				<div class="cell">
+				    <a href="/"><span id="logo_vector"></span></a>
+					<a href="/"><span id="logo_vector_mobile"></span></a>
+					<div id="sandwichA">
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
+					<div id="sandwich"></div>
+					<div id="close"></div>
+				</div>
+				<div id="menuCell" class="cell">				 <span class="date">13  16:24, </span>
+					<ul class="menu">
+				<li><a href="/"></a><li><a href="/news" class="selected"></a></li><li><a href="/articles"></a><li><a href="/dorkontrol"> </a></li> <li><a href="/searcher" class="search"><svg enable-background="new 0 0 512 512"  id="Layer_1" version="1.1" viewBox="0 0 512 512"   xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M497.913,497.913c-18.782,18.782-49.225,18.782-68.008,0l-84.862-84.863c-34.889,22.382-76.13,35.717-120.659,35.717  C100.469,448.767,0,348.312,0,224.383S100.469,0,224.384,0c123.931,0,224.384,100.452,224.384,224.383  c0,44.514-13.352,85.771-35.718,120.676l84.863,84.863C516.695,448.704,516.695,479.131,497.913,497.913z M224.384,64.109  c-88.511,0-160.274,71.747-160.274,160.273c0,88.526,71.764,160.274,160.274,160.274c88.525,0,160.273-71.748,160.273-160.274  C384.657,135.856,312.909,64.109,224.384,64.109z"></path></svg></a></li></ul>
+					 
+				</div>
+				<div id="weatherCell" class="cell" >
+					<a href="/weather" class="weatherLink">
+						<div class="weather">
+							<span><span class="svg" title=",  , "><svg style="height: 40px;" viewBox="0 0 55 38"   xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="#fc0" transform="translate(21)"><path d="m10.4786986 6.49218377v-5.55374783c0-.51828386.420152-.93843594.9384359-.93843594s.9384359.42015208.9384359.93843594v5.57051914c-.3440725-.03035549-.6924108-.04585594-1.0443695-.04585594-.2798986 0-.5575076.00980308-.8325023.02908463zm7.1384116 1.80826843 3.2340285-4.45125836c.3046396-.41930045.891509-.51225143 1.3108095-.20761182.4193004.30463961.5122514.89150898.2076118 1.31080943l-3.2560538 4.48157349c-.4668347-.4161123-.967148-.79546456-1.496396-1.13351274zm4.5971105 5.5570877 5.2134326-1.6939469c.4929172-.1601585 1.0223397.1095957 1.1824982.6025129.1601586.4929173-.1095957 1.0223398-.6025129 1.1824983l-5.2420922 1.703259c-.1364773-.617814-.3216638-1.217333-.5513257-1.7943233zm.4808738 7.1777269 5.4269586 1.7633258c.4929172.1601585.7626714.689581.6025129 1.1824982-.1601585.4929173-.689581.7626715-1.1824983.602513l-5.4455427-1.7693641c.244973-.5710511.4459196-1.1654655.5985695-1.7789729zm-18.90588102-11.84337429-3.08017782-4.23950106c-.30463961-.41930045-.21168863-1.00616982.20761182-1.31080943s1.00616982-.21168863 1.31080943.20761182l3.09286516 4.25696369c-.53986258.32131454-1.05174198.68473608-1.53110859 1.08573498z" fill-rule="nonzero"/><path d="m19.007085 23.5555495c1.1281313-1.5622918 1.7929142-3.4812865 1.7929142-5.5555495 0-5.2467051-4.2532948-9.5-9.5-9.5-1.84175926 0-3.56110738.52410454-5.01703726 1.43130655.05719217-.00131853.11437289-.00197888.17153294-.00197888 4.00796412 0 7.37199442 3.15512773 7.86832202 7.25613643l.0786498.6498596c2.4013459.8777191 4.216117 3.060426 4.6056183 5.7202258z"/></g><path d="m12.3499141 31.9980669c-3.9653846-.0925368-7.3499141-3.495856-7.3499141-7.727752 0-3.1605092 1.8601757-6.0672325 4.62869693-7.2334152l.82137627-.3472861.1720059-.9185616c.7392386-3.9239222 4.0054172-6.771052 7.762489-6.771052 2.1945241 0 4.3088433.97918249 5.8018155 2.6868439l.6735286.7706053.9537628-.2835828c.544041-.1623408 1.0958126-.2445387 1.6408199-.2445387 2.982552 0 5.5066611 2.3884244 5.8828103 5.4964344-.0945598-.0039094-.1895746-.0058827-.2850065-.0058827-.518816 0-1.039344.0600374-1.5528287.1780794-1.6247714-1.6545914-3.8395516-2.5979588-6.1428668-2.5979588-4.0599929 0-7.5727147 2.9008602-8.4878756 6.9188094-2.9380064 1.3468728-4.8687276 4.391037-4.8687276 7.6957986 0 .8272274.1225157 1.6273332.3499141 2.3834589zm25.7809205-6.9202023.7379209.3513961c1.9030161.9073486 3.1312445 2.8901049 3.1312445 5.0528032 0 3.0675005-2.6757511 5.5179361-5.634814 5.5179361h-.365186-15.623101c-.1688465.0049775-.2944795.0049775-.376899 0-3.2633356-.1970786-6-2.9702557-6-6.385392 0-2.6108555 1.5783309-5.0120617 3.9273792-5.97543l.6969253-.2868885.1459444-.7588117c.6272328-3.241501 3.3985359-5.5934778 6.5863543-5.5934778 1.8620205 0 3.6559883.8088899 4.9227526 2.2195667l.5714788.636587.8092532-.234264c.4616106-.1341077.9297804-.2020103 1.3922109-.2020103 2.6212591 0 4.825183 2.116864 5.0186823 4.8185392z" fill="#ddd"/><g fill="#09f"><path d="m4.81750488 4.06738281c-.20497927 1.07920156-1.54955622 2.43413359-2.84683538 1.709437s-1.12421798-2.23534602-.39193415-3.26558934 3.42230225-2.82010397 3.42230225-2.82010397.02144655 3.29705475-.18353272 4.37625631z" transform="translate(30 39)"/><path d="m4.95861387 4.03169562 1.65-1.636c.128-.13.131-.34 0-.47l-.048-.047c-.128-.132-.34-.132-.47-.003l-1.653 1.638-.55-2.26c-.043-.178-.225-.288-.405-.244l-.064.016c-.178.042-.291.227-.248.403l.566 2.306-2.307-.563c-.177-.043-.36.065-.405.245l-.014.064c-.047.181.067.361.245.403l2.254.551-1.647 1.634c-.13.131-.13.342-.003.473l.048.047c.131.131.34.131.471.003l1.651-1.642.555 2.264c.043.178.225.289.402.244l.064-.014c.181-.045.293-.225.247-.403l-.563-2.306 2.305.562c.177.045.359-.067.402-.244l.017-.064c.045-.177-.067-.36-.244-.404z" transform="translate(17 38)"/></g></g></svg></span>  <span class="now"> </span><br/><span class="temp">&minus;0,2°C</span></span></div>
+					</a>
+				</div>
+				<div class="cell">
+									<div class="quote">
+				<a href="https://www.4vsar.ru/news/snegopad-bysargin-prizval-saratovcev-soobschat-158659/">
+				    <img src="/i/news/small/369686.jpg" />
+				    
+					 <span class="author"> - :</span> 				    <span class="text">   ,    .  -  ,   ,    </span></a>
+				</div>
+								
+				</div>
+			 
+			
+			
+			
+			 
+				
+			 </div>
+			 
+			</div>
+		</div>
+	 
+		<div id="subheader">
+		    <div class="block">
+			
+			  <div class="row">
+			  
+		 					    <div class="col">
+						<span class="date">13  16:24						</span>
+						<span class="weather">
+						
+						
+						<span> <a href="/weather"></a></span> <span title=",  , "><svg style="height: 16px;" viewBox="0 0 55 38"   xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="#fc0" transform="translate(21)"><path d="m10.4786986 6.49218377v-5.55374783c0-.51828386.420152-.93843594.9384359-.93843594s.9384359.42015208.9384359.93843594v5.57051914c-.3440725-.03035549-.6924108-.04585594-1.0443695-.04585594-.2798986 0-.5575076.00980308-.8325023.02908463zm7.1384116 1.80826843 3.2340285-4.45125836c.3046396-.41930045.891509-.51225143 1.3108095-.20761182.4193004.30463961.5122514.89150898.2076118 1.31080943l-3.2560538 4.48157349c-.4668347-.4161123-.967148-.79546456-1.496396-1.13351274zm4.5971105 5.5570877 5.2134326-1.6939469c.4929172-.1601585 1.0223397.1095957 1.1824982.6025129.1601586.4929173-.1095957 1.0223398-.6025129 1.1824983l-5.2420922 1.703259c-.1364773-.617814-.3216638-1.217333-.5513257-1.7943233zm.4808738 7.1777269 5.4269586 1.7633258c.4929172.1601585.7626714.689581.6025129 1.1824982-.1601585.4929173-.689581.7626715-1.1824983.602513l-5.4455427-1.7693641c.244973-.5710511.4459196-1.1654655.5985695-1.7789729zm-18.90588102-11.84337429-3.08017782-4.23950106c-.30463961-.41930045-.21168863-1.00616982.20761182-1.31080943s1.00616982-.21168863 1.31080943.20761182l3.09286516 4.25696369c-.53986258.32131454-1.05174198.68473608-1.53110859 1.08573498z" fill-rule="nonzero"/><path d="m19.007085 23.5555495c1.1281313-1.5622918 1.7929142-3.4812865 1.7929142-5.5555495 0-5.2467051-4.2532948-9.5-9.5-9.5-1.84175926 0-3.56110738.52410454-5.01703726 1.43130655.05719217-.00131853.11437289-.00197888.17153294-.00197888 4.00796412 0 7.37199442 3.15512773 7.86832202 7.25613643l.0786498.6498596c2.4013459.8777191 4.216117 3.060426 4.6056183 5.7202258z"/></g><path d="m12.3499141 31.9980669c-3.9653846-.0925368-7.3499141-3.495856-7.3499141-7.727752 0-3.1605092 1.8601757-6.0672325 4.62869693-7.2334152l.82137627-.3472861.1720059-.9185616c.7392386-3.9239222 4.0054172-6.771052 7.762489-6.771052 2.1945241 0 4.3088433.97918249 5.8018155 2.6868439l.6735286.7706053.9537628-.2835828c.544041-.1623408 1.0958126-.2445387 1.6408199-.2445387 2.982552 0 5.5066611 2.3884244 5.8828103 5.4964344-.0945598-.0039094-.1895746-.0058827-.2850065-.0058827-.518816 0-1.039344.0600374-1.5528287.1780794-1.6247714-1.6545914-3.8395516-2.5979588-6.1428668-2.5979588-4.0599929 0-7.5727147 2.9008602-8.4878756 6.9188094-2.9380064 1.3468728-4.8687276 4.391037-4.8687276 7.6957986 0 .8272274.1225157 1.6273332.3499141 2.3834589zm25.7809205-6.9202023.7379209.3513961c1.9030161.9073486 3.1312445 2.8901049 3.1312445 5.0528032 0 3.0675005-2.6757511 5.5179361-5.634814 5.5179361h-.365186-15.623101c-.1688465.0049775-.2944795.0049775-.376899 0-3.2633356-.1970786-6-2.9702557-6-6.385392 0-2.6108555 1.5783309-5.0120617 3.9273792-5.97543l.6969253-.2868885.1459444-.7588117c.6272328-3.241501 3.3985359-5.5934778 6.5863543-5.5934778 1.8620205 0 3.6559883.8088899 4.9227526 2.2195667l.5714788.636587.8092532-.234264c.4616106-.1341077.9297804-.2020103 1.3922109-.2020103 2.6212591 0 4.825183 2.116864 5.0186823 4.8185392z" fill="#ddd"/><g fill="#09f"><path d="m4.81750488 4.06738281c-.20497927 1.07920156-1.54955622 2.43413359-2.84683538 1.709437s-1.12421798-2.23534602-.39193415-3.26558934 3.42230225-2.82010397 3.42230225-2.82010397.02144655 3.29705475-.18353272 4.37625631z" transform="translate(30 39)"/><path d="m4.95861387 4.03169562 1.65-1.636c.128-.13.131-.34 0-.47l-.048-.047c-.128-.132-.34-.132-.47-.003l-1.653 1.638-.55-2.26c-.043-.178-.225-.288-.405-.244l-.064.016c-.178.042-.291.227-.248.403l.566 2.306-2.307-.563c-.177-.043-.36.065-.405.245l-.014.064c-.047.181.067.361.245.403l2.254.551-1.647 1.634c-.13.131-.13.342-.003.473l.048.047c.131.131.34.131.471.003l1.651-1.642.555 2.264c.043.178.225.289.402.244l.064-.014c.181-.045.293-.225.247-.403l-.563-2.306 2.305.562c.177.045.359-.067.402-.244l.017-.064c.045-.177-.067-.36-.244-.404z" transform="translate(17 38)"/></g></g></svg></span>   <span class="temp">&minus;0,2°C</span></span>			     
+			</span></div>
+						 
+			<div class="col">	
+				<span class="currency">
+					<span class="usd"></span> <b>63.71</b> 					<span  class="euro"></span>	<b>70.02</b>  
+									</span>
+			</div>
+			<div class="col">
+				<a href="https://vk.com/4vsar"><img src="/templates/default/style/img/social/vk.png"  alt="vk"  height="22" /></a>
+				
+			<a href="https://twitter.com/4vsar"><img src="/templates/default/style/img/social/twitter_w.png" alt="twitter"  height="22" /></a>
+			<a href="https://www.facebook.com/4vsar.ru/"><img src="/templates/default/style/img/social/facebook.png" alt="facebook"  height="22" /></a>
+		 
+		 
+				<a href="/rss/index.php"><img src="/templates/default/style/img/social/rss.png" alt="rss" height="22" /></a>
+						 
+						 <form action="/searcher" method="GET"  class="search">
+  <input id="search" name="q" type="text" placeholder="  ?"><input id="search_submit"  type="submit" />
+  </form>
+			</div>
+					 					  </div>
+
+		    </div>
+		</div>
+		  
+	 
+		<div id="content">
+		    <div class="block">
+			
+		 
+			
+		        <div class="wide">
+				<span class="archiveNavigator">
+<a href="/archive/2022/01/12">&larr; 12 </a>
+    
+    <input name="date"     class="datepickerTimeField"  type="hidden" value="13.01.2022" />  <a   class="button2 dateTrigger"><img src="/templates/default/style/img/calendar.png" valign="middle" height="16" /> <span> </span></a>
+	 </span>
+	 <h1>  13  2022</h1>				<table class="lenta">
+				
+				 
+ 
+<tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle">&nbsp;</div>
+						<div class="date">16:08</div>
+						<a href="/news/predprinimatelnicy-oshtrafovali-na-250-tysyach-158702/">
+
+						
+
+						<h2>   250  - 4-  </h2>
+
+						<div class="desc">
+
+						    <a href="/news/predprinimatelnicy-oshtrafovali-na-250-tysyach-158702/"><p>       </p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle orange">&nbsp;</div>
+						<div class="date">16:04</div>
+						<a href="/news/saratovcev-snova-predypredili-o-snegopade-158701/">
+
+						<div class="img"><img src="/i/news/big/369781.jpg"  alt="      " title="      " /></div>
+
+						<h2 class="main">      </h2>
+
+						<div class="desc">
+
+						    <a href="/news/saratovcev-snova-predypredili-o-snegopade-158701/"><p>    </p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle">&nbsp;</div>
+						<div class="date">15:27</div>
+						<a href="/news/shtampovalnyi-press-razmozjil-saratovskomy-rabochemy-158700/">
+
+						
+
+						<h2>     </h2>
+
+						<div class="desc">
+
+						    <a href="/news/shtampovalnyi-press-razmozjil-saratovskomy-rabochemy-158700/"><p>        ,   «-»    </p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle">&nbsp;</div>
+						<div class="date">15:14</div>
+						<a href="/news/na-modernizaciu-pervichnogo-zvena-saratovskogo-158699/">
+
+						
+
+						<h2>        2  </h2>
+
+						<div class="desc">
+
+						    <a href="/news/na-modernizaciu-pervichnogo-zvena-saratovskogo-158699/"><p>     ,         </p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle">&nbsp;</div>
+						<div class="date">14:50</div>
+						<a href="/news/v-saratove-iz-za-silnogo-snegopada-158698/">
+
+						<div class="img"><span><img src="/templates/default/style/img/photo.png" /> 4 </span><img src="/i/news/big/369777.jpg"  alt="  -      " title="  -      " /></div>
+
+						<h2>  -      </h2>
+
+						<div class="desc">
+
+						    <a href="/news/v-saratove-iz-za-silnogo-snegopada-158698/"><p>,    «»,    - «»</p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle orange">&nbsp;</div>
+						<div class="date">14:48</div>
+						<a href="/news/pod-volskom-stolknylis-trybovoz-i-158697/">
+
+						<div class="img"><span><img src="/templates/default/style/img/photo.png" /> 1 </span><img src="/i/news/big/369776.jpg"  alt="     " title="     " /></div>
+
+						<h2 class="main">     </h2>
+
+						<div class="desc">
+
+						    <a href="/news/pod-volskom-stolknylis-trybovoz-i-158697/"><p>    </p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle">&nbsp;</div>
+						<div class="date">14:07</div>
+						<a href="/news/na-penzenskoi-neotlojka-yvyazla-v-158694/">
+
+						<div class="img"><span><img src="/templates/default/style/img/photo.png" /> 1 </span><img src="/i/news/big/369768.jpg"  alt="        " title="        " /></div>
+
+						<h2>        </h2>
+
+						<div class="desc">
+
+						    <a href="/news/na-penzenskoi-neotlojka-yvyazla-v-158694/"><p>«   .         ,  »</p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle orange">&nbsp;</div>
+						<div class="date">14:05</div>
+						<a href="/news/bastrykin-v-dele-o-pytkah-158695/">
+
+						<div class="img"><img src="/i/news/big/369769.jpg"  alt=":         6 " title=":         6 " /></div>
+
+						<h2 class="main">:         6 </h2>
+
+						<div class="desc">
+
+						    <a href="/news/bastrykin-v-dele-o-pytkah-158695/"><p>12        </p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle">&nbsp;</div>
+						<div class="date">13:58</div>
+						<a href="/news/snegopad-k-raschistke-saratovskih-dorog-158693/">
+
+						
+
+						<h2>.       </h2>
+
+						<div class="desc">
+
+						    <a href="/news/snegopad-k-raschistke-saratovskih-dorog-158693/"><p>    -     </p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle">&nbsp;</div>
+						<div class="date">13:44</div>
+						<a href="/news/v-saratovskoi-oblasti-iz-za-orvi-158692/">
+
+						
+
+						<h2>   -     </h2>
+
+						<div class="desc">
+
+						    <a href="/news/v-saratovskoi-oblasti-iz-za-orvi-158692/"><p> 13      .</p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle orange">&nbsp;</div>
+						<div class="date">13:41</div>
+						<a href="/news/omikron-v-saratovskoi-oblasti-158691/">
+
+						<div class="img"><img src="/i/news/big/369765.jpg"  alt="«».          5-6  " title="«».          5-6  " /></div>
+
+						<h2 class="main">«».          5-6  </h2>
+
+						<div class="desc">
+
+						    <a href="/news/omikron-v-saratovskoi-oblasti-158691/"><p>    «»      </p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle orange">&nbsp;</div>
+						<div class="date">13:33</div>
+						<a href="/news/saratovskoe-pravitelstvo-pozdravilo-jyrnalistov-s-158690/">
+
+						<div class="img"><span><img src="/templates/default/style/img/photo.png" /> 6 </span><img src="/i/news/big/369757.jpg"  alt="      " title="      " /></div>
+
+						<h2 class="main">      </h2>
+
+						<div class="desc">
+
+						    <a href="/news/saratovskoe-pravitelstvo-pozdravilo-jyrnalistov-s-158690/"><p>        </p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle orange">&nbsp;</div>
+						<div class="date">13:27</div>
+						<a href="/news/v-saratovskih-kovidnyh-gospitalyah-nahodyatsya-158689/">
+
+						<div class="img"><img src="/i/news/big/369756.jpg"  alt="     20   16 " title="     20   16 " /></div>
+
+						<h2 class="main">     20   16 </h2>
+
+						<div class="desc">
+
+						    <a href="/news/v-saratovskih-kovidnyh-gospitalyah-nahodyatsya-158689/"><p>   19 ,    </p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle">&nbsp;</div>
+						<div class="date">13:24</div>
+						<a href="/news/pervyi-slychai-omikrona-zaregistrirovali-y-158688/">
+
+						
+
+						<h2>  «»     </h2>
+
+						<div class="desc">
+
+						    <a href="/news/pervyi-slychai-omikrona-zaregistrirovali-y-158688/"><p>        </p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle orange">&nbsp;</div>
+						<div class="date">13:18</div>
+						<a href="/news/saratovskii-chinovnik-ob-evakyacii-vseh-158687/">
+
+						<div class="img"><img src="/i/news/big/369752.jpg"  alt="     :    " title="     :    " /></div>
+
+						<h2 class="main">     :    </h2>
+
+						<div class="desc">
+
+						    <a href="/news/saratovskii-chinovnik-ob-evakyacii-vseh-158687/"><p>         -</p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle">&nbsp;</div>
+						<div class="date">13:15</div>
+						<a href="/news/na-apparatah-ivl-nahodyatsya-129-158686/">
+
+						
+
+						<h2>    129   </h2>
+
+						<div class="desc">
+
+						    <a href="/news/na-apparatah-ivl-nahodyatsya-129-158686/"><p>   1 084 </p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle">&nbsp;</div>
+						<div class="date">12:54</div>
+						<a href="/news/v-saratove-pochti-100-vladelcev-158685/">
+
+						
+
+						<h2>   100          </h2>
+
+						<div class="desc">
+
+						    <a href="/news/v-saratove-pochti-100-vladelcev-158685/"><p>,            </p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle orange">&nbsp;</div>
+						<div class="date">12:52</div>
+						<a href="/news/v-saratovskoi-oblasti-ot-covid-158683/">
+
+						<div class="img"><img src="/i/news/big/369746.jpg"  alt="    COVID    7   4 " title="    COVID    7   4 " /></div>
+
+						<h2 class="main">    COVID    7   4 </h2>
+
+						<div class="desc">
+
+						    <a href="/news/v-saratovskoi-oblasti-ot-covid-158683/"><p> 13      5191</p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle">&nbsp;</div>
+						<div class="date">12:51</div>
+						<a href="/articles/dorojnyi-kontrol/saratovcy-jalyutsya-na-neraschischennye-trassy-158684/">
+
+						<div class="img"><span><img src="/templates/default/style/img/photo.png" /> 5 </span><img src="/i/articles/big/369747.jpg"  alt="    " title="    " /></div>
+
+						<h2 class="articles">    </h2>
+
+						<div class="desc">
+
+						    <a href="/articles/dorojnyi-kontrol/saratovcy-jalyutsya-na-neraschischennye-trassy-158684/"><p>   </p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle">&nbsp;</div>
+						<div class="date">12:44</div>
+						<a href="/news/aleksandr-loginov-dosrochno-probilsya-na-158682/">
+
+						
+
+						<h2>      </h2>
+
+						<div class="desc">
+
+						    <a href="/news/aleksandr-loginov-dosrochno-probilsya-na-158682/"><p>            -2022</p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle orange">&nbsp;</div>
+						<div class="date">12:25</div>
+						<a href="/news/eks-ministr-sergei-nesterov-vozglavil-myp-158681/">
+
+						<div class="img"><img src="/i/news/big/369743.JPG"  alt="-     «  »" title="-     «  »" /></div>
+
+						<h2 class="main">-     «  »</h2>
+
+						<div class="desc">
+
+						    <a href="/news/eks-ministr-sergei-nesterov-vozglavil-myp-158681/"><p>    23 </p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle orange">&nbsp;</div>
+						<div class="date">12:11</div>
+						<a href="/news/snegopad-v-saratove-za-tri-158680/">
+
+						<div class="img"><img src="/i/news/big/369740.jpg"  alt=".        100%  " title=".        100%  " /></div>
+
+						<h2 class="main">.        100%  </h2>
+
+						<div class="desc">
+
+						    <a href="/news/snegopad-v-saratove-za-tri-158680/"><p>   ,     </p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle">&nbsp;</div>
+						<div class="date">12:05</div>
+						<a href="/news/volodin-pozdravil-jyrnalistov-s-dnem-158679/">
+
+						
+
+						<h2>           </h2>
+
+						<div class="desc">
+
+						    <a href="/news/volodin-pozdravil-jyrnalistov-s-dnem-158679/"><p>«    ,    .    »</p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle">&nbsp;</div>
+						<div class="date">11:50</div>
+						<a href="/news/balakovskii-raion-stal-liderom-po-158678/">
+
+						
+
+						<h2>       </h2>
+
+						<div class="desc">
+
+						    <a href="/news/balakovskii-raion-stal-liderom-po-158678/"><p>        93,8%</p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle">&nbsp;</div>
+						<div class="date">11:16</div>
+						<a href="/news/pod-saratovom-desyatka-vletela-v-158677/">
+
+						<div class="img"><span><img src="/templates/default/style/img/photo.png" /> 1 </span><img src="/i/news/big/369737.jpg"  alt="  «»   .   " title="  «»   .   " /></div>
+
+						<h2>  «»   .   </h2>
+
+						<div class="desc">
+
+						    <a href="/news/pod-saratovom-desyatka-vletela-v-158677/"><p>    </p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle orange">&nbsp;</div>
+						<div class="date">11:14</div>
+						<a href="/news/v-saratove-iz-za-minirovaniya-otmeneny-158676/">
+
+						<div class="img"><img src="/i/news/big/369735.jpg"  alt="  - «»     " title="  - «»     " /></div>
+
+						<h2 class="main">  - «»     </h2>
+
+						<div class="desc">
+
+						    <a href="/news/v-saratove-iz-za-minirovaniya-otmeneny-158676/"><p>  ,      </p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle">&nbsp;</div>
+						<div class="date">10:53</div>
+						<a href="/news/saratovskii-voditel-podobral-koshelek-i-158675/">
+
+						<div class="img"><span class="play"></span><img src="/i/news/big/369734.jpg"  alt="        " title="        " /></div>
+
+						<h2>        </h2>
+
+						<div class="desc">
+
+						    <a href="/news/saratovskii-voditel-podobral-koshelek-i-158675/"><p>    5   </p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle">&nbsp;</div>
+						<div class="date">10:44</div>
+						<a href="/news/avtodor-nanes-pervoe-v-evrokybke-158674/">
+
+						
+
+						<h2><span class="icon"><span class="icon-photo"></span></span>«»      «»</h2>
+
+						<div class="desc">
+
+						    <a href="/news/avtodor-nanes-pervoe-v-evrokybke-158674/"><p>          -       </p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle orange">&nbsp;</div>
+						<div class="date">10:41</div>
+						<a href="/news/bastrykin-zayavil-o-roste-prestyplenii-158673/">
+
+						<div class="img"><img src="/i/news/big/369730.jpg"  alt="          " title="          " /></div>
+
+						<h2 class="main">          </h2>
+
+						<div class="desc">
+
+						    <a href="/news/bastrykin-zayavil-o-roste-prestyplenii-158673/"><p>«          ,      »</p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle">&nbsp;</div>
+						<div class="date">10:21</div>
+						<a href="/news/pristavy-spisali-y-firmy-700-158672/">
+
+						
+
+						<h2>    700     </h2>
+
+						<div class="desc">
+
+						    <a href="/news/pristavy-spisali-y-firmy-700-158672/"><p>      </p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle orange">&nbsp;</div>
+						<div class="date">10:10</div>
+						<a href="/news/saratovcy-pishyt-bysarginy-o-zastryavshih-158671/">
+
+						<div class="img"><span><img src="/templates/default/style/img/photo.png" /> 10 </span><img src="/i/news/big/369728.jpg"  alt="              " title="              " /></div>
+
+						<h2 class="main">              </h2>
+
+						<div class="desc">
+
+						    <a href="/news/saratovcy-pishyt-bysarginy-o-zastryavshih-158671/"><p>          700 </p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle orange">&nbsp;</div>
+						<div class="date">10:00</div>
+						<a href="/news/za-sytki-v-saratovskoi-oblasti-158670/">
+
+						<div class="img"><img src="/i/news/big/369722.jpg"  alt="        172 " title="        172 " /></div>
+
+						<h2 class="main">        172 </h2>
+
+						<div class="desc">
+
+						    <a href="/news/za-sytki-v-saratovskoi-oblasti-158670/"><p>     </p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle orange">&nbsp;</div>
+						<div class="date">09:58</div>
+						<a href="/news/v-magazine-na-bolshoi-sadovoi-158669/">
+
+						<div class="img"><img src="/i/news/big/369720.jpg"  alt="         " title="         " /></div>
+
+						<h2 class="main">         </h2>
+
+						<div class="desc">
+
+						    <a href="/news/v-magazine-na-bolshoi-sadovoi-158669/"><p>  40-     </p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle orange">&nbsp;</div>
+						<div class="date">09:47</div>
+						<a href="/news/pod-engelsom-tri-cheloveka-pogibli-158668/">
+
+						<div class="img"><span><img src="/templates/default/style/img/photo.png" /> 1 </span><img src="/i/news/big/369716.jpg"  alt="       " title="       " /></div>
+
+						<h2 class="main">       </h2>
+
+						<div class="desc">
+
+						    <a href="/news/pod-engelsom-tri-cheloveka-pogibli-158668/"><p>     </p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle">&nbsp;</div>
+						<div class="date">09:33</div>
+						<a href="/news/segodnya-prazdnyetsya-den-rossiiskoi-pechati-158667/">
+
+						
+
+						<h2>    </h2>
+
+						<div class="desc">
+
+						    <a href="/news/segodnya-prazdnyetsya-den-rossiiskoi-pechati-158667/"><p>          28  1991 </p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle orange">&nbsp;</div>
+						<div class="date">09:27</div>
+						<a href="/news/mejdy-solnechnym-i-ubileinym-sdelali-158666/">
+
+						<div class="img"><img src="/i/news/big/369711.jpg"  alt="     " title="     " /></div>
+
+						<h2 class="main">     </h2>
+
+						<div class="desc">
+
+						    <a href="/news/mejdy-solnechnym-i-ubileinym-sdelali-158666/"><p>  3,5      256 </p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle orange">&nbsp;</div>
+						<div class="date">09:20</div>
+						<a href="/news/snegopad-v-saratove-vstali-tramvai-158665/">
+
+						<div class="img"><span><img src="/templates/default/style/img/photo.png" /> 5 </span><img src="/i/news/big/369707.jpg"  alt=".    ,    " title=".    ,    " /></div>
+
+						<h2 class="main">.    ,    </h2>
+
+						<div class="desc">
+
+						    <a href="/news/snegopad-v-saratove-vstali-tramvai-158665/"><p>«    ,  ?         ?»</p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle">&nbsp;</div>
+						<div class="date">09:04</div>
+						<a href="/news/v-saratove-bez-vesti-propal-158663/">
+
+						<div class="img"><span><img src="/templates/default/style/img/photo.png" /> 1 </span><img src="/i/news/big/369702.jpg"  alt="     19-     " title="     19-     " /></div>
+
+						<h2>     19-     </h2>
+
+						<div class="desc">
+
+						    <a href="/news/v-saratove-bez-vesti-propal-158663/"><p>      11 </p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle">&nbsp;</div>
+						<div class="date">09:01</div>
+						<a href="/articles/blago-daru/shest-schastlivyh-detei-priemnoi-semi-158664/">
+
+						<div class="img"><span><img src="/templates/default/style/img/photo.png" /> 11 </span><img src="/i/articles/big/369705.jpg"  alt="      " title="      " /></div>
+
+						<h2 class="articles">      </h2>
+
+						<div class="desc">
+
+						    <a href="/articles/blago-daru/shest-schastlivyh-detei-priemnoi-semi-158664/"><p>  ,      </p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle orange">&nbsp;</div>
+						<div class="date">08:49</div>
+						<a href="/news/saratov-s-ytra-vnov-vstal-158662/">
+
+						<div class="img"><img src="/i/news/big/369696.jpg"  alt="      9- " title="      9- " /></div>
+
+						<h2 class="main">      9- </h2>
+
+						<div class="desc">
+
+						    <a href="/news/saratov-s-ytra-vnov-vstal-158662/"><p>- ,   ,       ,                </p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle orange">&nbsp;</div>
+						<div class="date">08:45</div>
+						<a href="/news/v-saratove-hozyaiky-balkona-osydili-158661/">
+
+						<div class="img"><img src="/i/news/big/369694.jpg"  alt="          " title="          " /></div>
+
+						<h2 class="main">          </h2>
+
+						<div class="desc">
+
+						    <a href="/news/v-saratove-hozyaiky-balkona-osydili-158661/"><p>    ,       </p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr><tr>
+
+					     
+
+						<td>
+						 
+						<div class="circle">&nbsp;</div>
+						<div class="date">05:30</div>
+						<a href="/news/v-saratovskoi-oblasti-jdyt-silnyi-158660/">
+
+						
+
+						<h2>     ,    </h2>
+
+						<div class="desc">
+
+						    <a href="/news/v-saratovskoi-oblasti-jdyt-silnyi-158660/"><p>      500   ,   </p></a>
+
+							<div class="clear">&nbsp;</div>
+
+						</div>
+
+						</a>
+
+						<div class="hr" />
+
+						</td>
+
+					</tr>				       
+				</table>
+				 <table class="prevdate">
+				    <tr>
+					    <td><a href="/archive/2022/01/12"><span>&larr;</span> 12 </a></td>
+						<td></td>
+						<td>   </td>
+					</tr>
+				</table>
+				 
+				</div>
+				 
+			 
+			</div>
+		</div>
+		 
+<div id="socialLine">
+	<div class="block"> 
+		<div class="footer-social-icons">
+				<a class="footer-social-vk" href="https://vk.com/4vsar" target="_blank"></a>
+				<a class="footer-social-fb" href="https://facebook.com/4vsar.ru/" target="_blank"></a>
+                <a class="footer-social-ok" href="https://ok.ru/group/51983309078618" target="_blank"></a>
+				<a class="footer-social-tw" href="https://twitter.com/4vsar/" target="_blank"></a>
+            </div>
+	</div>
+</div>
+ 
+<div id="footer">
+		    <div class="block"><!-- Yandex.Metrika informer -->
+<a href="https://metrika.yandex.ru/stat/?id=217420&amp;from=informer"
+target="_blank" rel="nofollow"><img src="https://informer.yandex.ru/informer/217420/3_1_FFFFFFFF_EFEFEFFF_0_pageviews"
+style="width:88px; height:31px; border:0;" align="right" alt="." title=".:    (,    )" class="ym-advanced-informer" data-cid="217420" data-lang="ru" /></a>
+<!-- /Yandex.Metrika informer --> 
+<a href="https://webmaster.yandex.ru/sqi?host=www.4vsar.ru"><img width="88" height="31" alt="" align="right"  border="0" style="margin-right: 5px" src="https://yandex.ru/cycounter?www.4vsar.ru&theme=light&lang=ru"/></a>
+			 <span class="age" style="top: 16px;right: 210px;">18+</span>
+			    <ul class="topmenu">
+				    <li><a href="/contacts"></a></li>  
+										<li><span><span href="tel:+78452659977">+7 (8452) 65-99-77</span>  <span  href="tel:+78452659967">65-99-67</span></span></li>
+					<li><a  href="mailto:4vsaratov@gmail.com" style="color:#1473ab">4vsaratov@gmail.com</a></li> 
+				</ul></div>
+				<div style="clear: both; height: 1px; background: #ccc">&nbsp;</div>
+				 <div class="block">
+				 
+				<p>- " "
+C     77-45905  20  2011 ,        ,     .</p>
+<p>       .</p>
+<p>        .   ,    ""  " ",          .
+</p>
+<p>  «».  &mdash;   .   &mdash;     </p>
+<p><a href="/privacy-policy" style="color: #333"> </a></p>
+ 
+   			</div>
+		</div>
+		<div id="topbutton">
+		<a id="linkbutton"><i></i><span id="text"></span></a><a href="/" class="home"><img src="/templates/default/style/img/home.png" title=" " /></a>
+	</div>
+ 		<link rel="stylesheet" href="/js/fancybox3/jquery.fancybox.min.css" />
+		<script src="/js/fancybox3/jquery.fancybox.min.js"></script>
+		<script src="/js/notify.min.js?1801"></script>
+				<script src="/js/comments/comments.js?200521-1"></script>
+		<link href="/js/comments/comments.css?200521-1" media="screen" rel="stylesheet" type="text/css" /> 
+
+				<script type="text/javascript">
+ 	function loadComments() {
+			 
+			widget();
+			$(".commnetsPanel").remove();
+			var url =  window.location.href;
+					
+					var r = url.search( /#comments/i );
+					  if(r == "-1") { 
+						history.pushState(null, null,  url + "#comments");
+						ym(217420, 'hit', url + '#comments', {referer: url});
+					  }
+		}
+	 
+				 
+		$(function() {
+		  
+		
+ 
+ 	
+
+	
+	 });
+ 
+</script>
+ 
+	</body>
+	 
+</html>

@@ -22,5 +22,4 @@ urlpatterns = [
     path('news/', include('news.urls')),
     path('', RedirectView.as_view(url='/news/', permanent=True)),
     path('accounts/', include('allauth.urls')),
-
 ]

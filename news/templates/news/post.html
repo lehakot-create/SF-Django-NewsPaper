@@ -25,8 +25,14 @@ News
 </div>
 <div class="card-footer mb-3 text-muted">
     <p>Категории: {% for cat in post.category.all %}
-                        <a href="{% url 'category_list' cat.id %}">{{ cat }}</a>
-                    {% endfor %}</p>
+        <a href="{% url 'category_list' cat.id %}">{{ cat }}</a>
+        {% if subscriber %}
+            <p>Вы подписаны на эту категорию новостей
+                <a class="btn btn-primary btn-sm" href="{% url 'unsubscribe' post.id %}" role="button">UnSubscribe</a></p>
+        {% else %}
+            <a class="btn btn-primary btn-sm" href="{% url 'subscribe' post.id %}" role="button">Subscribe</a>
+        {% endif %}
+    {% endfor %}</p>
     <p>Автор: {{ post.author }}</p>
 </div>
 

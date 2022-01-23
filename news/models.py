@@ -30,6 +30,7 @@ class Author(models.Model):
 
 class Category(models.Model):
     name_cat = models.CharField(max_length=62, unique=True, verbose_name='Название категории')
+    subscribers = models.ManyToManyField(User, through='CategorySubscribers')
 
     def __str__(self):
         return f'{self.name_cat}'
@@ -88,6 +89,12 @@ class PostCategory(models.Model):
 
     def __str__(self):
         return f'{self.category}: {self.post}'
+
+
+class CategorySubscribers(models.Model):
+    category = models.ForeignKey('Category', on_delete=models.CASCADE)
+    subscribers = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    # subscribers = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
 
 class Comment(models.Model):
