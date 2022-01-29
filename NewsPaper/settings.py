@@ -172,7 +172,7 @@ if DEBUG:
 
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/accounts/login/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 ACCOUNT_EMAIL_VRIFICATION = 'mandatory'
 ACCOUNT_EMAIL_REQUIRED = True
