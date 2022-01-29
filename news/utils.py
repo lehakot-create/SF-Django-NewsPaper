@@ -473,9 +473,9 @@ class Parser:
 
 
 def run_parser():
-    lst_obj = [Neftegaz(), Angi(),  Ria(),
-                Tatar_inform(),  Ria56(), Ch74()]
+    lst_obj = [Neftegaz(), Angi(),  Ria()]
     #### Guardinfo(), Sarnovosti(), Ufa1(), Fourvsar(), Kurgan45()
+    #Tatar_inform(), Ria56(), Ch74()
     # lst_parser = []
     # lst_obj = [ex.Fourvsar()]
     # lst_obj = []
