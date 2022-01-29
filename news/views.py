@@ -1,19 +1,17 @@
 import datetime
 from datetime import datetime
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Post, Comment, Category, Author
 from django.contrib.auth.models import User, Group
-from .filters import PostFilter
-from django.core.paginator import Paginator
-from .forms import PostForm, CommentForm, UserProfileForm
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from django.urls import reverse_lazy
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.http import Http404
-from django.shortcuts import render
-from django.core.mail import EmailMultiAlternatives
-from django.template.loader import render_to_string
+from .tasks import send_email
+from .filters import PostFilter
+from .forms import PostForm, CommentForm, UserProfileForm
+from .models import Post, Comment, Category, Author
 
 
 class NewsList(ListView):
@@ -43,21 +41,13 @@ def news_detail(request, pk):
     post = Post.objects.get(id=pk)
     comment = Comment.objects.filter(post_id=pk).values('text', 'user__username')
 
-    # print('*' * 50)
     id = post.category.values('id')[0]['id']
-    # print(f'id={id}')
     c = Category.objects.get(id=id)
-    # print(f'c={c}')
     try:
         uid = User.objects.get(username=request.user).id
-        # print(f'uid={uid}')
         s = c.subscribers.filter(id=uid).exists()
-        # print(s)
-        # print(request.user.username)
-        # print('*' * 50)
         if s:
             s = c.subscribers.filter(id=uid)[0].username
-            # print(s)
             if s == request.user.username:
                 subscriber = True
         else:
@@ -75,19 +65,9 @@ def subscribe(request, pk):
         c = Category.objects.get(id=p)
         c.subscribers.add(u)
 
-    post = Post.objects.get(id=pk)
-    html_content = render_to_string(
-        'news/email.html',
-        {'post': post, 'user': u, 'category': c}
-    )
-    msg = EmailMultiAlternatives(
-        subject=f'{request.user}',
-        body=post.text,
-        from_email='alex85aleshka@yandex.ru',
-        to=[u.email],
-    )
-    msg.attach_alternative(html_content, 'text/html')
-    msg.send()
+    send_email.apply_async(kwargs={'user_id': request.user.id,
+                            'pk': pk,
+                            'category_id': c.id})
 
     url = Post.objects.get(id=pk).get_absolute_url()
     return redirect(url)

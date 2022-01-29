@@ -174,5 +174,25 @@ ACCOUNT_USERNAME_REQUIRED = False
 # ACCOUNT_EMAIL_VERIFICATION = 'none'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
-APSCHEDULER_RUN_NOW_TIMEOUT = 25  # Seconds
+# APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
+# APSCHEDULER_RUN_NOW_TIMEOUT = 25  # Seconds
+
+CELERY_IMPORTS = ("news.tasks", )
+CELERY_BROKER_URL = 'redis://:vESrrZycyOfUuGFPslEqFmQjdgClZSwb@redis-18169.c277.us-east-1-3.ec2.cloud.redislabs.com:18169/0'
+CELERY_RESULT_BACKEND = 'redis://:vESrrZycyOfUuGFPslEqFmQjdgClZSwb@redis-18169.c277.us-east-1-3.ec2.cloud.redislabs.com:18169/0'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+
+CELERY_TIMEZONE = "UTC"
+
+# celery -A NewsPaper worker --loglevel=INFO --concurrency 1 -P solo  # а потом вот это
+# celery -A NewsPaper worker -l INFO
+
+# celery -A NewsPaper worker -l INFO -B
+
+# celery -A NewsPaper beat    # запускаем сначала это
+
+# celery -A NewsPaper worker -l INFO --loglevel=DEBUG
+
+# celery -A NewsPaper flower  --address=127.0.0.6 --port=5566
