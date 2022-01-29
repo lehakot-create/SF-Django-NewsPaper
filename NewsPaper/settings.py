@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-klv(t=hdmqthc1=0y%21v!n2fo@8n7yc%aw&z_)+*4b(o)#ruw
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -196,3 +196,9 @@ CELERY_TIMEZONE = "UTC"
 # celery -A NewsPaper worker -l INFO --loglevel=DEBUG
 
 # celery -A NewsPaper flower  --address=127.0.0.6 --port=5566
+
+
+import dj_database_url
+
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
