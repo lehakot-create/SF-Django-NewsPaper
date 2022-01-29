@@ -136,6 +136,7 @@ STATIC_URL = 'static/'
 # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # STATIC_URL = '/static/'
 # STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
@@ -172,7 +173,7 @@ if DEBUG:
 
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/accounts/login/'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 
 ACCOUNT_EMAIL_VRIFICATION = 'mandatory'
 ACCOUNT_EMAIL_REQUIRED = True
