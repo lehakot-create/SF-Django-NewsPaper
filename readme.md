@@ -22,6 +22,7 @@
 Можно запустить задачу сбора новостей вручную
 запускаем консоли и пишем:
 py manage.py shell
+from news.models import *
 from news.tasks import run_news_parser
 run_news_parser()
 
