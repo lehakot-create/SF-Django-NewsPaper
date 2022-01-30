@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-klv(t=hdmqthc1=0y%21v!n2fo@8n7yc%aw&z_)+*4b(o)#ruw
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -131,6 +132,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -196,3 +198,7 @@ CELERY_TIMEZONE = "UTC"
 # celery -A NewsPaper worker -l INFO --loglevel=DEBUG
 
 # celery -A NewsPaper flower  --address=127.0.0.6 --port=5566
+
+
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
