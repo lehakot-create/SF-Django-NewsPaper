@@ -219,3 +219,11 @@ db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
 
 django_heroku.settings(locals())
+
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': os.path.join(BASE_DIR, 'Cache_files'),
+    }
+}
