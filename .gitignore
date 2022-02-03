@@ -4,4 +4,5 @@ news/fill_db/extentions.py
 news/parser.py
 */__pycache__/
 **/__pycache__/
-Cache_files/
+Cache_files/*
+*.pyc

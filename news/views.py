@@ -1,6 +1,6 @@
 import datetime
 from datetime import datetime
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.decorators import login_required
@@ -12,6 +12,7 @@ from .tasks import send_email
 from .filters import PostFilter
 from .forms import PostForm, CommentForm, UserProfileForm
 from .models import Post, Comment, Category, Author
+from django.core.cache import cache
 
 
 class NewsList(ListView):
@@ -29,33 +30,82 @@ class NewsList(ListView):
         return context
 
 
-def news_detail(request, pk):
-    if request.method == 'POST':
+class NewsDetailView(TemplateView):
+    model = Post
+
+    def get(self, request, *args, **kwargs):
+        post = cache.get(f'post-{kwargs.get("pk")}', None)
+        if not post:
+            post = Post.objects.get(id=kwargs.get('pk'))
+            cache.set(f'post-{kwargs.get("pk")}', post)
+        comment = Comment.objects.filter(post_id=kwargs.get('pk'))\
+            .values('text', 'user__username')
+        form = CommentForm()
+
+        try:
+            id = post.category.values('id')[0]['id']
+        except IndexError:
+            raise Http404('Не указана категория новости')
+
+        c = Category.objects.get(id=id)
+        try:
+            uid = User.objects.get(username=request.user).id
+            s = c.subscribers.filter(id=uid).exists()
+            if s:
+                s = c.subscribers.filter(id=uid)[0].username
+                if s == request.user.username:
+                    subscriber = True
+            else:
+                subscriber = False
+        except User.DoesNotExist:
+            subscriber = False
+
+        return render(request, 'news/post.html', {'post': post,
+                                                  'comment': comment,
+                                                  'form': form,
+                                                  'subscriber': subscriber})
+
+    def post(self, request, *args, **kwargs):
         form = CommentForm(request.POST)
         if form.is_valid():
             text = form.cleaned_data
-            Comment.objects.create(post=Post.objects.get(id=pk),
+            post = Post.objects.get(id=kwargs.get('pk'))
+            Comment.objects.create(post=post,
                                    user=request.user,
                                    text=text['text'])
-    form = CommentForm()
-    post = Post.objects.get(id=pk)
-    comment = Comment.objects.filter(post_id=pk).values('text', 'user__username')
+            url = post.get_absolute_url()
+            return redirect(url)
+        raise Http404('Неверные данные')
 
-    id = post.category.values('id')[0]['id']
-    c = Category.objects.get(id=id)
-    try:
-        uid = User.objects.get(username=request.user).id
-        s = c.subscribers.filter(id=uid).exists()
-        if s:
-            s = c.subscribers.filter(id=uid)[0].username
-            if s == request.user.username:
-                subscriber = True
-        else:
-            subscriber = False
-    except User.DoesNotExist:
-        subscriber = False
 
-    return render(request, 'news/post.html', {'post': post, 'comment': comment, 'form': form, 'subscriber': subscriber})
+
+# def news_detail(request, pk):
+#     if request.method == 'POST':
+#         form = CommentForm(request.POST)
+#         if form.is_valid():
+#             text = form.cleaned_data
+#             Comment.objects.create(post=Post.objects.get(id=pk),
+#                                    user=request.user,
+#                                    text=text['text'])
+#     form = CommentForm()
+#     post = Post.objects.get(id=pk)
+#     comment = Comment.objects.filter(post_id=pk).values('text', 'user__username')
+#
+#     id = post.category.values('id')[0]['id']
+#     c = Category.objects.get(id=id)
+#     try:
+#         uid = User.objects.get(username=request.user).id
+#         s = c.subscribers.filter(id=uid).exists()
+#         if s:
+#             s = c.subscribers.filter(id=uid)[0].username
+#             if s == request.user.username:
+#                 subscriber = True
+#         else:
+#             subscriber = False
+#     except User.DoesNotExist:
+#         subscriber = False
+#
+#     return render(request, 'news/post.html', {'post': post, 'comment': comment, 'form': form, 'subscriber': subscriber})
 
 @login_required
 def subscribe(request, pk):
