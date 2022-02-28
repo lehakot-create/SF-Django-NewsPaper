@@ -19,11 +19,13 @@ News
 
 {% block content %}
 
-
+{% load cache %}
+{% cache 60 category %}
 <h5>Категории:
 {% for cat in category %}
     <a href="{% url 'category_list' cat.id %}">{{ cat.name_cat }}</a>
 {% endfor %}</h5>
+{% endcache %}
 
 <ul>
     <li>На странице поиска показывать только результаты запроса</li>

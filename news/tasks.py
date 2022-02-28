@@ -42,7 +42,6 @@ def send_email_every_monday():
     all_email = User.objects.values('email')
     for email in all_email:
         if email.get('email'):
-            # print(email.get('email'))
             html_content = render_to_string(
                 'news/mass_mailing.html',
                 {'posts': all_title}

@@ -1,0 +1,1 @@
+web: gunicorn NewsPaperpy.wsgi --log-file -
