@@ -17,7 +17,7 @@ class EditDate:
                  "октября": '.10.', "ноября": '.11.', "декабря": '.12.'}
         for key in month:
             if key in date_time:
-                return date_time[:2] + month[key] + str(date.today().year) + ' ' + date_time.rstrip()[-5:]
+                return (date_time[:2] + month[key] + str(date.today().year)).replace(' ', '') + ' ' + date_time.rstrip()[-5:]
 
 
 class Neftegaz:
@@ -111,11 +111,20 @@ class Ria:
                 all_item = soup.find_all('div', class_='list-item')
                 for item in all_item:
                     time_ = item.find('div', class_='list-item__date').text
+                    month = {"января": '.01.', "февраля": '.02.', "марта": '.03.',
+                             "апреля": '.04.', "майя": '.05.', "июня": '.06.',
+                             "июля": '.07.', "августа": '.08.', "сентября": '.09.',
+                             "октября": '.10.', "ноября": '.11.', "декабря": '.12.'}
                     if 'Вчера,' in time_:
                         yesterday = datetime.today().date() - timedelta(1)
                         time_ = f"{yesterday.strftime('%d.%m.%Y')} {time_}".replace('Вчера, ', '')
                     else:
-                        time_ = f"{str(datetime.today().date().strftime('%d.%m.%Y'))} {time_}"
+                        for key in month:
+                            if key in time_:
+                                time_ = EditDate.edit_date(time_)
+                                break
+                        else:
+                            time_ = f"{str(datetime.today().date().strftime('%d.%m.%Y'))} {time_}"
                     title = item.find('a', class_='list-item__title color-font-hover-only').text.strip()
                     url_item = item.find('a', class_='list-item__title color-font-hover-only').get('href')
                     lst.append([time_, 'ria.ru', title, url_item])
@@ -135,6 +144,7 @@ class Ria:
             url = 'https://ria.ru/incidents/' + url_next_page[20:]
 
             time.sleep(randint(5, 10))
+        print(lst)
         return lst
 
 
@@ -453,7 +463,8 @@ class Parser:
             'ria56': 6,
             'Tatar_inform': 8,
             'ufa1': 9,
-            'sarnovosti.ru': 7
+            'sarnovosti.ru': 7,
+            'guardinfo.online': 10
         }
 
         for el in lst:
@@ -473,11 +484,11 @@ class Parser:
 
 
 def run_parser():
-    lst_obj = [Neftegaz(), Angi(),  Ria()]
+    lst_obj = [Ria(), Neftegaz(), Angi()]
     #### Guardinfo(), Sarnovosti(), Ufa1(), Fourvsar(), Kurgan45()
     #Tatar_inform(), Ria56(), Ch74()
     # lst_parser = []
-    # lst_obj = [ex.Fourvsar()]
+    # lst_obj = [Guardinfo()]
     # lst_obj = []
     for obj in lst_obj:
         try:

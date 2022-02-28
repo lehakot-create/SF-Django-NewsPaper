@@ -13,10 +13,14 @@ from .filters import PostFilter
 from .forms import PostForm, CommentForm, UserProfileForm
 from .models import Post, Comment, Category, Author
 from django.core.cache import cache
+# import logging
+#
+# logger = logging.getLogger(__name__)
 
 
 class NewsList(ListView):
     # permission_required = ('news.view_post')
+    # logger.info('INFO')
     model = Post
     template_name = 'news/posts.html'
     context_object_name = 'posts'
@@ -158,7 +162,7 @@ class CategoryList(ListView):
         _id = self.kwargs.get('pk')
         context['category'] = Category.objects.get(id=_id)
         c = Category.objects.get(id=_id)
-        context['posts'] = Post.objects.filter(category=c)
+        context['posts'] = Post.objects.filter(category=c).order_by('-date_time')
         return context
 
 

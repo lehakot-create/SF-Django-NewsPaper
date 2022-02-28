@@ -6,3 +6,6 @@ news/parser.py
 **/__pycache__/
 Cache_files/*
 *.pyc
+error.log
+general.log
+security.log
