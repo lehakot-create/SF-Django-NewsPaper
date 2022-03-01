@@ -1,5 +1,7 @@
 import datetime
+import pytz
 from datetime import datetime
+from django.utils import timezone
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
@@ -13,14 +15,10 @@ from .filters import PostFilter
 from .forms import PostForm, CommentForm, UserProfileForm
 from .models import Post, Comment, Category, Author
 from django.core.cache import cache
-# import logging
-#
-# logger = logging.getLogger(__name__)
 
 
 class NewsList(ListView):
     # permission_required = ('news.view_post')
-    # logger.info('INFO')
     model = Post
     template_name = 'news/posts.html'
     context_object_name = 'posts'
@@ -31,7 +29,13 @@ class NewsList(ListView):
         context = super().get_context_data(**kwargs)
         context['category'] = Category.objects.all()
         context['is_author'] = self.request.user.groups.filter(name='authors').exists()
+        context['current_time'] = timezone.now()
+        context['timezones'] = pytz.common_timezones
         return context
+
+    def post(self, request):
+        request.session['django_timezone'] = request.POST['timezone']
+        return redirect('/')
 
 
 class NewsDetailView(TemplateView):

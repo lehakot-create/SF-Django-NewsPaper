@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+{% load i18n %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<p>Здравствуйте!</p>
-<p>Новые статьи за прошедшую неделю</p>
+<p>{% trans 'Здравствуйте' %}!</p>
+<p>{% trans 'Новые статьи за прошедшую неделю' %}</p>
 {% for post in posts %}
 <ul>
     <li>{{ post }}</li>

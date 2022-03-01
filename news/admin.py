@@ -1,17 +1,20 @@
 from django.contrib import admin
 from .models import Post, Comment, Author, Category, PostCategory, CategorySubscribers
-from .utils import run_parser
+from modeltranslation.admin import TranslationAdmin
 
 
-# def run_parse(modeladmin, request, qyeryset):
-#     run_parser()
-#     run_parse.short_description = 'Запустить парсер новостей'
+class CategoryAdmin(TranslationAdmin):
+    model = Category
+
+
+class PostsAdmin(TranslationAdmin):
+    model = Post
 
 
 class PostAdmin(admin.ModelAdmin):
     list_display = ('author', 'choices', 'title', 'url')
     search_fields = ('title', 'text')
-    # actions = [run_parse]
+    ordering = ['-date_time']
 
 
 class CommentAdmin(admin.ModelAdmin):
