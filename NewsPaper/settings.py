@@ -158,7 +158,7 @@ USE_TZ = False
 
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATIC_URL = '/static/'
-STATICFILE_DIRS = ("staticfiles",)
+STATICFILES_DIRS = ("staticfiles",)
 
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
