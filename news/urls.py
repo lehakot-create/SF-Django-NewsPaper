@@ -17,4 +17,10 @@ urlpatterns = [
     path('profile/<int:pk>/', ProfileDetailView.as_view(), name='profile'),
     path('<int:pk>/subscribe/', subscribe, name='subscribe'),
     path('<int:pk>/unsubscribe/', unsubscribe, name='unsubscribe'),
+
+    # API
+    path('news/', NewsApi.as_view()),
+    path('news/<int:pk>/', NewsApiDetail.as_view()),
+    path('articles/', ArticlesApi.as_view()),
+    path('articles/<int:pk>/', ArticlesApiDetail.as_view()),
 ]

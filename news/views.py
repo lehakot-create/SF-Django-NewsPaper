@@ -15,6 +15,9 @@ from .filters import PostFilter
 from .forms import PostForm, CommentForm, UserProfileForm
 from .models import Post, Comment, Category, Author
 from django.core.cache import cache
+from rest_framework import generics, permissions, status, mixins
+from rest_framework.response import Response
+from .serializers import NewsSerializer
 
 
 class NewsList(ListView):
@@ -86,35 +89,6 @@ class NewsDetailView(TemplateView):
         raise Http404('Неверные данные')
 
 
-
-# def news_detail(request, pk):
-#     if request.method == 'POST':
-#         form = CommentForm(request.POST)
-#         if form.is_valid():
-#             text = form.cleaned_data
-#             Comment.objects.create(post=Post.objects.get(id=pk),
-#                                    user=request.user,
-#                                    text=text['text'])
-#     form = CommentForm()
-#     post = Post.objects.get(id=pk)
-#     comment = Comment.objects.filter(post_id=pk).values('text', 'user__username')
-#
-#     id = post.category.values('id')[0]['id']
-#     c = Category.objects.get(id=id)
-#     try:
-#         uid = User.objects.get(username=request.user).id
-#         s = c.subscribers.filter(id=uid).exists()
-#         if s:
-#             s = c.subscribers.filter(id=uid)[0].username
-#             if s == request.user.username:
-#                 subscriber = True
-#         else:
-#             subscriber = False
-#     except User.DoesNotExist:
-#         subscriber = False
-#
-#     return render(request, 'news/post.html', {'post': post, 'comment': comment, 'form': form, 'subscriber': subscriber})
-
 @login_required
 def subscribe(request, pk):
     if request.method == 'GET':
@@ -129,6 +103,7 @@ def subscribe(request, pk):
 
     url = Post.objects.get(id=pk).get_absolute_url()
     return redirect(url)
+
 
 @login_required
 def unsubscribe(request, pk):
@@ -231,3 +206,83 @@ class ProfileDetailView(UpdateView):
             raise Http404('Данная страница вам не доступна')
         return context
 
+
+# class NewsApi(generics.ListCreateAPIView):
+#     queryset = Post.objects.all().filter(choices='News')
+#     serializer_class = NewsSerializer
+#     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+#
+#     def post(self, request, *args, **kwargs):
+#         author = Author.objects.get(full_name_id=request.user.id)
+#         request.data['author'] = author.id
+#         serializer = NewsSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class NewsApi(generics.ListCreateAPIView):
+    queryset = Post.objects.all().filter(choices='News')
+    serializer_class = NewsSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def post(self, request, *args, **kwargs):
+        author = Author.objects.get(full_name_id=request.user.id)
+        request.data['author'] = author.id
+        request.data['choices'] = 'News'
+        serializer = NewsSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            print(request.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class NewsApiDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Post.objects.all().filter(choices='News')
+    serializer_class = NewsSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def put(self, request, pk, format=None):
+        news = self.get_object()
+        author = Author.objects.get(full_name_id=request.user.id)
+        request.data['author'] = author.id
+        serializer = NewsSerializer(news, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ArticlesApi(generics.ListCreateAPIView):
+    queryset = Post.objects.all().filter(choices='Article')
+    serializer_class = NewsSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def post(self, request, *args, **kwargs):
+        author = Author.objects.get(full_name_id=request.user.id)
+        request.data['author'] = author.id
+        request.data['choices'] = 'Article'
+        serializer = NewsSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            print(request.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ArticlesApiDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Post.objects.all().filter(choices='Article')
+    serializer_class = NewsSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def put(self, request, pk, format=None):
+        news = self.get_object()
+        author = Author.objects.get(full_name_id=request.user.id)
+        request.data['author'] = author.id
+        serializer = NewsSerializer(news, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
