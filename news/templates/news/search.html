@@ -1,15 +1,16 @@
 {% extends 'default.html' %}
+{% load i18n %}
 
 {% block title %}{% endblock title %}
 
 
 {% block navigation %}
-<li class="nav-item"><a class="nav-link" href="{% url 'news_list' %}">News</a></li>
+<li class="nav-item"><a class="nav-link" href="{% url 'news_list' %}">{% trans 'Новости' %}</a></li>
 {% endblock navigation%}
 
 
 {% block content %}
-<h4> Количество всех новостей: {{ filter.qs | length }}</h4>
+<h4> {% trans 'Количество всех новостей' %}: {{ filter.qs | length }}</h4>
 <form method="GET">
     {% csrf_token %}
     <table>
@@ -17,7 +18,7 @@
             <td>{{ filter.form }}</td>
         </tr>
     </table>
-    <input type="submit" value="Find"/>
+    <input type="submit" value="{% trans 'Найти' %}"/>
 </form>
 
 {% if filter.qs|length %}
@@ -26,7 +27,7 @@
         <br>
     {% endfor %}
 {% else %}
-    <p>Ничего не найдено</p>
+    <p>{% trans 'Ничего не найдено' %}</p>
 {% endif %}
 
 {% endblock content %}

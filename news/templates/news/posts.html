@@ -1,4 +1,5 @@
 {% extends 'default.html' %}
+{% load i18n %}
 
 {% load custom_filters %}
 
@@ -7,12 +8,12 @@ News
 {% endblock title%}
 
 {% block navigation %}
-    <li class="nav-item"><a class="nav-link" href="{% url 'search' %}">Find</a></li>
+    <li class="nav-item"><a class="nav-link" href="{% url 'search' %}">{% trans 'Найти' %}</a></li>
 {% endblock navigation %}
 
 {% block isauthor %}
     {% if not is_author %}
-        <button><a href="{% url 'upgrade' %}">Стать автором</a></button>
+        <button><a href="{% url 'upgrade' %}">{% trans 'Стать автором' %}</a></button>
     {% endif %}
 {% endblock isauthor %}
 
@@ -20,18 +21,17 @@ News
 {% block content %}
 
 {% load cache %}
-{% cache 60 category %}
-<h5>Категории:
-{% for cat in category %}
+
+<h5>{% trans 'Категории' %}:
+    {% cache 60 category %}
+    {% for cat in category %}
     <a href="{% url 'category_list' cat.id %}">{{ cat.name_cat }}</a>
-{% endfor %}</h5>
+    {% endfor %}</h5>
 {% endcache %}
 
-<ul>
-    <li>На странице поиска показывать только результаты запроса</li>
-</ul>
 
-    <h1>Все новости</h1>
+
+    <h1>{% trans 'Все новости' %}</h1>
     <hr>
 {% if posts %}
 {% for post in posts %}
@@ -43,17 +43,17 @@ News
     </div>
 </div>
 <div class="card-footer mb-3 text-muted">
-    <p>Категории: {% for cat in post.category.all %}
+    <p>{% trans 'Категории' %}: {% for cat in post.category.all %}
         <a href="{{ cat.get_absolute_url }}">{{ cat }}</a>
         {% endfor %}</p>
-    <a class="btn btn-primary btn-sm" href="{% url 'update_post' post.id %}" role="button">Редактировать</a>
-    <a class="btn btn-primary btn-sm" href="{% url 'delete_post' post.id %}" role="button">Удалить</a>
+    <a class="btn btn-primary btn-sm" href="{% url 'update_post' post.id %}" role="button">{% trans 'Редактировать' %}</a>
+    <a class="btn btn-primary btn-sm" href="{% url 'delete_post' post.id %}" role="button">{% trans 'Удалить' %}</a>
 
 </div>
 {% endfor %}
 
 {% else %}
-<p>Новостей нет</p>
+<p>{% trans 'Новостей нет' %}</p>
 {% endif %}
 
 {% endblock content %}

@@ -1,4 +1,5 @@
 {% extends 'default.html' %}
+{% load i18n %}
 
 {% block title%}{% endblock title %}
 
@@ -28,6 +29,6 @@
             <td>{{ form.text }}</td>
         </tr>
     </table>
-    <input type="submit" value="Сохранить">
+    <input type="submit" value="{% trans 'Сохранить' %}">
 </form>
 {% endblock content %}

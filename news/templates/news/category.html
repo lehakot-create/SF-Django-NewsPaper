@@ -1,17 +1,18 @@
 {% extends 'default.html' %}
+{% load i18n %}
 
 {% load custom_filters %}
 
 {% block title %}
-News
+{% trans 'Новости' %}
 {% endblock title%}
 
 {% block navigation %}
-<li class="nav-item"><a class="nav-link" href="{% url 'search' %}">Find</a></li>
+<li class="nav-item"><a class="nav-link" href="{% url 'search' %}">{% trans 'Найти' %}</a></li>
 {% endblock navigation%}
 
 {% block content %}
-<h1>Категория: {{ category.name_cat }}</h1>
+<h1>{% trans 'Категория' %}: {{ category.name_cat }}</h1>
 <hr>
 {% if posts %}
     {% for post in posts %}
@@ -23,14 +24,14 @@ News
           </div>
         </div>
         <div class="card-footer mb-3 text-muted">
-            <p>Категории: {% for cat in post.category.all %}
+            <p>{% trans 'Категории' %}: {% for cat in post.category.all %}
                 <a href="{% url 'category_list' category.id %}">{{ cat }}</a>
             {% endfor %}</p>
         </div>
 
     {% endfor %}
 {% else %}
-    <p>Новостей нет</p>
+    <p>{% trans 'Новостей нет' %}</p>
 {% endif%}
 
 {% if is_paginated %}

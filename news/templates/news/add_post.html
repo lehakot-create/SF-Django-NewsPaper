@@ -1,5 +1,5 @@
 {% extends 'default.html' %}
-
+{% load i18n %}
 
 
 {% block content %}
@@ -10,6 +10,6 @@
                 <td>{{ form }}</td>
             </tr>
         </table>
-        <input type="submit" value="Add news">
+        <input type="submit" value="{% trans 'Добавить' %}">
     </form>
 {% endblock content %}

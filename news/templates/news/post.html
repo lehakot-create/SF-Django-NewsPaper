@@ -1,9 +1,10 @@
 {% extends 'default.html' %}
+{% load i18n %}
 
 {% load custom_filters %}
 
 {% block title %}
-News
+{% trans 'Новости' %}
 {% endblock title%}
 
 {% block content %}
@@ -16,7 +17,7 @@ News
         <p class="card-text">{{ post.text  | bad_word }}</p>
 
         {% if comment != '-' %}
-            <p>Комментарии:</p>
+            <p>{% trans 'Комментарии' %}:</p>
             {% for el in comment %}
                 <p>{{ el.user__username }}: {{ el.text | bad_word }}</p>
             {% endfor %}
@@ -24,15 +25,15 @@ News
     </div>
 </div>
 <div class="card-footer mb-3 text-muted">
-    <p>Категории: {% for cat in post.category.all %}
+    <p>{% trans 'Категории' %}: {% for cat in post.category.all %}
         <a href="{% url 'category_list' cat.id %}">{{ cat }}</a>
-        <a class="btn btn-primary btn-sm" href="{% url 'update_post' post.id %}" role="button">Редактировать</a>
-        <a class="btn btn-primary btn-sm" href="{% url 'delete_post' post.id %}" role="button">Удалить</a>
+        <a class="btn btn-primary btn-sm" href="{% url 'update_post' post.id %}" role="button">{% trans 'Редактировать' %}</a>
+        <a class="btn btn-primary btn-sm" href="{% url 'delete_post' post.id %}" role="button">{% trans 'Удалить' %}</a>
         {% if subscriber %}
-            <p>Вы подписаны на эту категорию новостей
-                <a class="btn btn-primary btn-sm" href="{% url 'unsubscribe' post.id %}" role="button">UnSubscribe</a></p>
+            <p>{% trans 'Вы подписаны на эту категорию новостей' %}
+                <a class="btn btn-primary btn-sm" href="{% url 'unsubscribe' post.id %}" role="button">{% trans 'Отписаться' %}</a></p>
         {% else %}
-            <a class="btn btn-primary btn-sm" href="{% url 'subscribe' post.id %}" role="button">Subscribe</a>
+            <a class="btn btn-primary btn-sm" href="{% url 'subscribe' post.id %}" role="button">{% trans 'Подписаться' %}</a>
         {% endif %}
     {% endfor %}</p>
     <p>Автор: {{ post.author }}</p>
@@ -41,7 +42,7 @@ News
  <form method="POST">
      {% csrf_token %}
      {{ form }}
-     <input type="submit" value="Add comment">
+     <input type="submit" value="{% trans 'Добавить' %}">
  </form>
 {% endblock content %}
 
