@@ -34,6 +34,8 @@ class NewsList(ListView):
         context['is_author'] = self.request.user.groups.filter(name='authors').exists()
         context['current_time'] = timezone.now()
         context['timezones'] = pytz.common_timezones
+        from NewsPaper import settings
+        print(settings.STATICFILES_DIRS)
         return context
 
     def post(self, request):
