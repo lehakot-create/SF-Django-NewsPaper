@@ -19,8 +19,8 @@ urlpatterns = [
     path('<int:pk>/unsubscribe/', unsubscribe, name='unsubscribe'),
 
     # API
-    path('newsapi/', NewsApi.as_view()),
-    path('newsapi/<int:pk>/', NewsApiDetail.as_view()),
-    path('articles/', ArticlesApi.as_view()),
-    path('articles/<int:pk>/', ArticlesApiDetail.as_view()),
+    # path('newsapi/', NewsApi.as_view()),
+    # path('newsapi/<int:pk>/', NewsApiDetail.as_view()),
+    # path('articles/', ArticlesApi.as_view()),
+    # path('articles/<int:pk>/', ArticlesApiDetail.as_view()),
 ]

@@ -21,8 +21,8 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('news/', include('news.urls')),
-    # path('', RedirectView.as_view(url='/news/', permanent=True)),
+    path('news/', include('news.urls')),
+    path('', RedirectView.as_view(url='/news/', permanent=True)),
     path('', include('news.urls')),
     path('accounts/', include('allauth.urls')),
     path('i18n/', include('django.conf.urls.i18n')),
@@ -30,5 +30,5 @@ urlpatterns = [
        template_name='swagger-ui.html',
        extra_context={'schema_url': 'openapi-schema'}),
          name='swagger-ui'),
-    path('api/v1/', include('news.urls')),
+    # path('api/v1/', include('news.urls')),
 ]
