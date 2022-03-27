@@ -10,13 +10,14 @@ from django.core.paginator import Paginator
 from django.urls import reverse_lazy
 from django.shortcuts import redirect, render
 from django.http import Http404
+from django.core.cache import cache
+from rest_framework import generics, permissions, status, mixins
+from rest_framework.response import Response
+
 from .tasks import send_email
 from .filters import PostFilter
 from .forms import PostForm, CommentForm, UserProfileForm
 from .models import Post, Comment, Category, Author
-from django.core.cache import cache
-from rest_framework import generics, permissions, status, mixins
-from rest_framework.response import Response
 from .serializers import NewsSerializer
 
 
@@ -34,8 +35,6 @@ class NewsList(ListView):
         context['is_author'] = self.request.user.groups.filter(name='authors').exists()
         context['current_time'] = timezone.now()
         context['timezones'] = pytz.common_timezones
-        # from NewsPaper import settings
-        # print(settings.STATICFILES_DIRS)
         return context
 
     def post(self, request):
