@@ -1,16 +1,17 @@
 <!DOCTYPE html>
+{% load i18n %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<p>Здравствуйте, {{ user }}!</p>
-<p>Новая статья в твоем любимом разделе - {{ category }}</p>
+<p>{% trans 'Здравствуйте' %}, {{ user }}!</p>
+<p>{% trans 'Новая статья в твоем любимом разделе' %} - {{ category }}</p>
 {{ post.title }}
 {{ post.text|truncatewords:50}}
 
-<p>Вы получили это письмо потому что подписаны на новости категории {{ category}}</p>
-<p>Чтобы отписаться - перейдите по <a href="{% url 'unsubscribe' post.id %}">ссылке</a></p>
+<p>{% trans 'Вы получили это письмо потому что подписаны на новости категории' %} {{ category}}</p>
+<p>{% trans 'Чтобы отписаться - перейдите по' %} <a href="{% url 'unsubscribe' post.id %}">{% trans 'ссылке' %}</a></p>
 </body>
 </html>

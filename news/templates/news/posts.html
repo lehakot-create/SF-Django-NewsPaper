@@ -1,57 +1,75 @@
 {% extends 'default.html' %}
+{% load i18n %}
 
 {% load custom_filters %}
 
 {% block title %}
-News
+    {% trans 'Новости' %}
 {% endblock title%}
 
 {% block navigation %}
-    <li class="nav-item"><a class="nav-link" href="{% url 'search' %}">Find</a></li>
+    <li class="nav-item"><a class="nav-link" href="{% url 'search' %}">{% trans 'Найти' %}</a></li>
 {% endblock navigation %}
 
 {% block isauthor %}
     {% if not is_author %}
-        <button><a href="{% url 'upgrade' %}">Стать автором</a></button>
+        <button><a href="{% url 'upgrade' %}">{% trans 'Стать автором' %}</a></button>
     {% endif %}
 {% endblock isauthor %}
 
+{% block category %}
+    {% load cache %}
+        {% cache 60 category %}
+            <div class="container flex-auto">
+                <div class="nav-scroller py-1 mb-2">
+                    <nav class="nav d-flex justify-content-between">
+                        {% for cat in category %}
+                            <a class="p-2 link-secondary" href="{% url 'category_list' cat.id %}">{{ cat.name_cat }}</a>
+                        {% endfor %}
+                    </nav>
+                </div>
+            </div>
+    {% endcache %}
+{% endblock category %}
+
+
 
 {% block content %}
+    {% if posts %}
+        {% for post in posts %}
+            <div class="row mb-2">
+                <div class="col-md-12">
+                    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow h-md-250 position-relative">
+                        <div class="col p-4 d-flex flex-column position-static">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="mb-1 text-muted">{{ post.date_time|date:'d.m.Y'}}</div>
+                                    </div>
+                                    <div class="col-6 text-end">
+                                        {% for cat in post.category.all %}
+                                            <a href="{{ cat.get_absolute_url }}">{{ cat }}</a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            <hr>
 
+                            <strong class="d-inline-block mb-2 text-primary">{{ post.title | bad_word }}</strong>
+                            <p class="card-text mb-auto">{{ post.text | truncatewords:20 | bad_word }}</p>
+                            <a href="{% url 'news_detail' post.id %}">Continue reading</a>
+                            <br>
+                            <div class="row">
+                                <div class="col text-end">
+                                    <a class="btn btn-secondary btn-sm" href="{% url 'update_post' post.id %}" role="button">{% trans 'Редактировать' %}</a>
+                                    <a class="btn btn-secondary btn-sm" href="{% url 'delete_post' post.id %}" role="button">{% trans 'Удалить' %}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
 
-<h5>Категории:
-{% for cat in category %}
-    <a href="{% url 'category_list' cat.id %}">{{ cat.name_cat }}</a>
-{% endfor %}</h5>
-
-<ul>
-    <li>На странице поиска показывать только результаты запроса</li>
-</ul>
-
-    <h1>Все новости</h1>
-    <hr>
-{% if posts %}
-{% for post in posts %}
-<div class="card">
-    <h5 class="card-header">{{ post.date_time|date:'d.m.Y'}}</h5>
-    <div class="card-body">
-        <h5 class="card-title"><a href="{% url 'news_detail' post.id %}">{{ post.title | bad_word }}</a></h5>
-        <p class="card-text">{{ post.text | truncatewords:20 | bad_word }}</p>
-    </div>
-</div>
-<div class="card-footer mb-3 text-muted">
-    <p>Категории: {% for cat in post.category.all %}
-        <a href="{{ cat.get_absolute_url }}">{{ cat }}</a>
-        {% endfor %}</p>
-    <a class="btn btn-primary btn-sm" href="{% url 'update_post' post.id %}" role="button">Редактировать</a>
-    <a class="btn btn-primary btn-sm" href="{% url 'delete_post' post.id %}" role="button">Удалить</a>
-
-</div>
-{% endfor %}
-
-{% else %}
-<p>Новостей нет</p>
-{% endif %}
-
+    {% else %}
+        <p>{% trans 'Новостей нет' %}</p>
+    {% endif %}
 {% endblock content %}
