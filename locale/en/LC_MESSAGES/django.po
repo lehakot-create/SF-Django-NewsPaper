@@ -1,0 +1,148 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-03-28 23:40+0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\news\templates\news\add_post.html:13 .\news\templates\news\post.html:47
+#: .\news\templates\news\post.html:105
+msgid "Добавить"
+msgstr "Add"
+
+#: .\news\templates\news\category.html:7 .\news\templates\news\post.html:7
+#: .\news\templates\news\posts.html:7 .\news\templates\news\search.html:8
+#: .\news\templates\news\update_post.html:5
+msgid "Новости"
+msgstr "News"
+
+#: .\news\templates\news\category.html:11 .\news\templates\news\posts.html:11
+#: .\news\templates\news\search.html:21
+msgid "Найти"
+msgstr "Find"
+
+#: .\news\templates\news\category.html:30
+msgid "Новости категории"
+msgstr "Category news"
+
+#: .\news\templates\news\category.html:55 .\news\templates\news\post.html:33
+#: .\news\templates\news\post.html:90 .\news\templates\news\posts.html:62
+msgid "Редактировать"
+msgstr "Edit"
+
+#: .\news\templates\news\category.html:56
+#: .\news\templates\news\delete_post.html:19 .\news\templates\news\post.html:34
+#: .\news\templates\news\post.html:91 .\news\templates\news\posts.html:63
+msgid "Удалить"
+msgstr "Delete"
+
+#: .\news\templates\news\category.html:66 .\news\templates\news\posts.html:73
+msgid "Новостей нет"
+msgstr "No news"
+
+#: .\news\templates\news\email.html:9 .\news\templates\news\mass_mailing.html:9
+msgid "Здравствуйте"
+msgstr "Hello"
+
+#: .\news\templates\news\email.html:10
+msgid "Новая статья в твоем любимом разделе"
+msgstr "New article in your favorite category"
+
+#: .\news\templates\news\email.html:14
+msgid "Вы получили это письмо потому что подписаны на новости категории"
+msgstr "You have received this email because you are subscribed to the category news"
+
+#: .\news\templates\news\email.html:15
+msgid "Чтобы отписаться - перейдите по"
+msgstr "To unsubscribe, go to"
+
+#: .\news\templates\news\email.html:15
+msgid "ссылке"
+msgstr "link"
+
+#: .\news\templates\news\mass_mailing.html:10
+msgid "Новые статьи за прошедшую неделю"
+msgstr "New articles for the past week"
+
+#: .\news\templates\news\post.html:36 .\news\templates\news\post.html:93
+msgid "Вы подписаны на эту категорию новостей"
+msgstr "You are subscribed to this news category"
+
+#: .\news\templates\news\post.html:37 .\news\templates\news\post.html:94
+msgid "Отписаться"
+msgstr "Unsubscribe"
+
+#: .\news\templates\news\post.html:39 .\news\templates\news\post.html:96
+msgid "Подписаться"
+msgstr "Subscribe"
+
+#: .\news\templates\news\post.html:51 .\news\templates\news\post.html:80
+msgid "Комментарии"
+msgstr "Comments"
+
+#: .\news\templates\news\post.html:88
+msgid "Категории"
+msgstr "Categories"
+
+#: .\news\templates\news\posts.html:16
+msgid "Стать автором"
+msgstr "Become an author"
+
+#: .\news\templates\news\profile.html:16
+#: .\news\templates\news\update_post.html:31
+msgid "Сохранить"
+msgstr "Save"
+
+#: .\news\templates\news\search.html:13
+msgid "Количество всех новостей"
+msgstr ""
+
+#: .\news\templates\news\search.html:30
+msgid "Ничего не найдено"
+msgstr "Number of all news"
+
+#: .\templates\default.html:24 .\templates\default.html:96
+#: .\templates\default.html:109
+msgid "Новости людей для людей"
+msgstr "People news for people"
+
+#: .\templates\default.html:28
+msgid "Добавить новость"
+msgstr "Add news"
+
+#: .\templates\default.html:34
+msgid "Контакты"
+msgstr "Contact"
+
+#: .\templates\default.html:37
+msgid "Вы вошли как:"
+msgstr "Welcome:"
+
+#: .\templates\default.html:38
+msgid "Выйти"
+msgstr "Logout"
+
+#: .\templates\default.html:45
+msgid "Вы вошли как Гость"
+msgstr "Welcome Guests"
+
+#: .\templates\default.html:46
+msgid "Войти"
+msgstr "Login"
+
+#: .\templates\default.html:95 .\templates\default.html:108
+msgid "Новостной агрегатор"
+msgstr "News aggregator"
