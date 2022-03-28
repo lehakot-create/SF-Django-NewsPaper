@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-klv(t=hdmqthc1=0y%21v!n2fo@8n7yc%aw&z_)+*4b(o)#ruw'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -131,10 +131,8 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles' # for develop
-
-# STATIC_ROOT = 'staticfiles'  # for deploy
-STATICFILES_DIRS = (  # for deploy
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_DIRS = (
         os.path.join(BASE_DIR, 'static'),
     )
 
