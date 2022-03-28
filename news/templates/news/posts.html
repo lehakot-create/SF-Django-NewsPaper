@@ -13,7 +13,8 @@
 
 {% block isauthor %}
     {% if not is_author %}
-        <button class="btn btn-secondary btn-small"><a href="{% url 'upgrade' %}">{% trans 'Стать автором' %}</a></button>
+{#        <button class="btn btn-secondary btn-small"><a href="{% url 'upgrade' %}">{% trans 'Стать автором' %}</a></button>#}
+        <a class="btn btn-secondary btn-small" href="{% url 'upgrade' %}" role="button">{% trans 'Стать автором' %}</a>
     {% endif %}
 {% endblock isauthor %}
 
