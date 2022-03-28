@@ -4,46 +4,106 @@
 {% load custom_filters %}
 
 {% block title %}
-{% trans 'Новости' %}
+    {% trans 'Новости' %}
 {% endblock title%}
 
 {% block content %}
+    <div class="row mb-2">
+        <div class="col-md-12">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="mb-1 text-muted">{{ post.date_time|date:'d.m.Y H:m'}}</div>
+                        </div>
+                        <div class="col-6 text-end">
+                            {% for cat in post.category.all %}
+                                <a href="{{ cat.get_absolute_url }}">{{ cat }}</a>
+                            {% endfor %}
+                                    </div>
+                                </div>
+                            <hr>
 
-<div class="card">
-    <h5 class="card-header">{{ post.date_time|date:'d.m.Y H:m'}}</h5>
+                            <strong class="d-inline-block mb-2 text-primary"><a href="{{post.url}}" target="_blank">{{ post.title | bad_word }}</a></strong>
+                            <p class="card-text mb-auto">{{ post.text  | bad_word }}</p>
+                            <a href="{% url 'news_detail' post.id %}">Continue reading</a>
+                            <br>
+                            <div class="row">
+                                <div class="col text-end">
+                                    <a class="btn btn-secondary btn-sm" href="{% url 'update_post' post.id %}" role="button">{% trans 'Редактировать' %}</a>
+                                    <a class="btn btn-secondary btn-sm" href="{% url 'delete_post' post.id %}" role="button">{% trans 'Удалить' %}</a>
+                                    {% if subscriber %}
+                                        <p>{% trans 'Вы подписаны на эту категорию новостей' %}
+                                            <a class="btn btn-primary btn-sm" href="{% url 'unsubscribe' post.id %}" role="button">{% trans 'Отписаться' %}</a></p>
+                                    {% else %}
+                                        <a class="btn btn-secondary btn-sm" href="{% url 'subscribe' post.id %}" role="button">{% trans 'Подписаться' %}</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <hr>
+                            <form method="POST">
+                                {% csrf_token %}
+                                {{ form }}
+                                <input type="submit" value="{% trans 'Добавить' %}" class="btn btn-secondary btn-sm">
+                            </form>
+                            <br>
+                            {% if comment != '-' %}
+                                <p>{% trans 'Комментарии' %}:</p>
+                                <div class="row">
+                                    {% for el in comment %}
+                                        <div class="col-2 md-auto text-start">
+                                            {{ el.user__username }}:
+                                        </div>
+                                        <div class="col-10 text-start">
+                                            {{ el.text | bad_word }}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
 
-    <div class="card-body">
-        <h5 class="card-title"><a href="{{post.url}}" target="_blank">{{ post.title | bad_word }}</a></h5>
-        <p class="card-text">{{ post.text  | bad_word }}</p>
 
-        {% if comment != '-' %}
-            <p>{% trans 'Комментарии' %}:</p>
-            {% for el in comment %}
-                <p>{{ el.user__username }}: {{ el.text | bad_word }}</p>
-            {% endfor %}
-        {% endif %}
-    </div>
-</div>
-<div class="card-footer mb-3 text-muted">
-    <p>{% trans 'Категории' %}: {% for cat in post.category.all %}
-        <a href="{% url 'category_list' cat.id %}">{{ cat }}</a>
-        <a class="btn btn-primary btn-sm" href="{% url 'update_post' post.id %}" role="button">{% trans 'Редактировать' %}</a>
-        <a class="btn btn-primary btn-sm" href="{% url 'delete_post' post.id %}" role="button">{% trans 'Удалить' %}</a>
-        {% if subscriber %}
-            <p>{% trans 'Вы подписаны на эту категорию новостей' %}
-                <a class="btn btn-primary btn-sm" href="{% url 'unsubscribe' post.id %}" role="button">{% trans 'Отписаться' %}</a></p>
-        {% else %}
-            <a class="btn btn-primary btn-sm" href="{% url 'subscribe' post.id %}" role="button">{% trans 'Подписаться' %}</a>
-        {% endif %}
-    {% endfor %}</p>
-    <p>Автор: {{ post.author }}</p>
-</div>
 
- <form method="POST">
-     {% csrf_token %}
-     {{ form }}
-     <input type="submit" value="{% trans 'Добавить' %}">
- </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+<!--<div class="card">-->
+<!--    <h5 class="card-header">{{ post.date_time|date:'d.m.Y H:m'}}</h5>-->
+
+<!--    <div class="card-body">-->
+<!--        <h5 class="card-title"><a href="{{post.url}}" target="_blank">{{ post.title | bad_word }}</a></h5>-->
+<!--        <p class="card-text">{{ post.text  | bad_word }}</p>-->
+
+<!--        {% if comment != '-' %}-->
+<!--            <p>{% trans 'Комментарии' %}:</p>-->
+<!--            {% for el in comment %}-->
+<!--                <p>{{ el.user__username }}: {{ el.text | bad_word }}</p>-->
+<!--            {% endfor %}-->
+<!--        {% endif %}-->
+<!--    </div>-->
+<!--</div>-->
+<!--<div class="card-footer mb-3 text-muted">-->
+<!--    <p>{% trans 'Категории' %}: {% for cat in post.category.all %}-->
+<!--        <a href="{% url 'category_list' cat.id %}">{{ cat }}</a>-->
+<!--        <a class="btn btn-primary btn-sm" href="{% url 'update_post' post.id %}" role="button">{% trans 'Редактировать' %}</a>-->
+<!--        <a class="btn btn-primary btn-sm" href="{% url 'delete_post' post.id %}" role="button">{% trans 'Удалить' %}</a>-->
+<!--        {% if subscriber %}-->
+<!--            <p>{% trans 'Вы подписаны на эту категорию новостей' %}-->
+<!--                <a class="btn btn-primary btn-sm" href="{% url 'unsubscribe' post.id %}" role="button">{% trans 'Отписаться' %}</a></p>-->
+<!--        {% else %}-->
+<!--            <a class="btn btn-primary btn-sm" href="{% url 'subscribe' post.id %}" role="button">{% trans 'Подписаться' %}</a>-->
+<!--        {% endif %}-->
+<!--    {% endfor %}</p>-->
+<!--    <p>Автор: {{ post.author }}</p>-->
+<!--</div>-->
+
+<!-- <form method="POST">-->
+<!--     {% csrf_token %}-->
+<!--     {{ form }}-->
+<!--     <input type="submit" value="{% trans 'Добавить' %}">-->
+<!-- </form>-->
 {% endblock content %}
 
 

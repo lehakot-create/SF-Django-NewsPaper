@@ -1,6 +1,7 @@
 from django.contrib import admin
-from .models import Post, Comment, Author, Category, PostCategory, CategorySubscribers
 from modeltranslation.admin import TranslationAdmin
+
+from .models import Post, Comment, Author, Category, PostCategory, CategorySubscribers
 
 
 class CategoryAdmin(TranslationAdmin):

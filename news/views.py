@@ -131,10 +131,29 @@ class Search(ListView):
         return context
 
 
+# class CategoryList(ListView):
+#     # model = Category
+#     model = Post
+#     template_name = 'news/category.html'
+#     context_object_name = 'category'
+#     queryset = Post.objects.order_by('-date_time')
+#     paginate_by = 10
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         _id = self.kwargs.get('pk')
+#         context['category'] = Category.objects.get(id=_id)
+#         c = Category.objects.get(id=_id)
+#         context['posts'] = Post.objects.filter(category=c).order_by('-date_time')
+#         context['all_category'] = Category.objects.all()
+#         return context
+
+
 class CategoryList(ListView):
-    model = Category
+    model = Post
     template_name = 'news/category.html'
-    context_object_name = 'category'
+    context_object_name = 'posts'
+    queryset = Post.objects.order_by('-date_time')
     paginate_by = 10
 
     def get_context_data(self, **kwargs):
@@ -143,6 +162,7 @@ class CategoryList(ListView):
         context['category'] = Category.objects.get(id=_id)
         c = Category.objects.get(id=_id)
         context['posts'] = Post.objects.filter(category=c).order_by('-date_time')
+        context['all_category'] = Category.objects.all()
         return context
 
 
