@@ -178,19 +178,22 @@ EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = 'alex85aleshka@yandex.ru'
 
 
-if DEBUG:
-    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# if DEBUG:
+#     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/accounts/login/'
 
-ACCOUNT_EMAIL_VRIFICATION = 'mandatory'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_AUTHENTIFICATION_METHOD = 'email'
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 # ACCOUNT_EMAIL_VERIFICATION = 'none'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 
 # APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
 # APSCHEDULER_RUN_NOW_TIMEOUT = 25  # Seconds

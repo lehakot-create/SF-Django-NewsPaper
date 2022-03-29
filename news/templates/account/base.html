@@ -17,16 +17,16 @@
           </div>
           <div class="col border shadow pe-auto py-2">
               {% block body %}
-{#                  {% if messages %}#}
-{#                      <div>#}
-{#                          <strong>Messages:</strong>#}
-{#                          <ul>#}
-{#                            {% for message in messages %}#}
-{#                                <li>{{message}}</li>#}
-{#                            {% endfor %}#}
-{#                          </ul>#}
-{#                        </div>#}
-{#                  {% endif %}#}
+                  {% if messages %}
+                      <div>
+                          <strong>Messages:</strong>
+                          <ul>
+                            {% for message in messages %}
+                                <li>{{message}}</li>
+                            {% endfor %}
+                          </ul>
+                        </div>
+                  {% endif %}
                   <div class="row">
                       {% if user.is_authenticated %}
                           <div class="col text-end">
@@ -54,5 +54,6 @@
 
           </div>
       </div>
+  </div>
   </body>
 </html>
