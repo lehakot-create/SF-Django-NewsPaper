@@ -60,50 +60,12 @@
                                     {% endfor %}
                                 </div>
                             {% endif %}
-
-
-
-
                         </div>
                     </div>
                 </div>
             </div>
-
-<!--<div class="card">-->
-<!--    <h5 class="card-header">{{ post.date_time|date:'d.m.Y H:m'}}</h5>-->
-
-<!--    <div class="card-body">-->
-<!--        <h5 class="card-title"><a href="{{post.url}}" target="_blank">{{ post.title | bad_word }}</a></h5>-->
-<!--        <p class="card-text">{{ post.text  | bad_word }}</p>-->
-
-<!--        {% if comment != '-' %}-->
-<!--            <p>{% trans 'Комментарии' %}:</p>-->
-<!--            {% for el in comment %}-->
-<!--                <p>{{ el.user__username }}: {{ el.text | bad_word }}</p>-->
-<!--            {% endfor %}-->
-<!--        {% endif %}-->
-<!--    </div>-->
-<!--</div>-->
-<!--<div class="card-footer mb-3 text-muted">-->
-<!--    <p>{% trans 'Категории' %}: {% for cat in post.category.all %}-->
-<!--        <a href="{% url 'category_list' cat.id %}">{{ cat }}</a>-->
-<!--        <a class="btn btn-primary btn-sm" href="{% url 'update_post' post.id %}" role="button">{% trans 'Редактировать' %}</a>-->
-<!--        <a class="btn btn-primary btn-sm" href="{% url 'delete_post' post.id %}" role="button">{% trans 'Удалить' %}</a>-->
-<!--        {% if subscriber %}-->
-<!--            <p>{% trans 'Вы подписаны на эту категорию новостей' %}-->
-<!--                <a class="btn btn-primary btn-sm" href="{% url 'unsubscribe' post.id %}" role="button">{% trans 'Отписаться' %}</a></p>-->
-<!--        {% else %}-->
-<!--            <a class="btn btn-primary btn-sm" href="{% url 'subscribe' post.id %}" role="button">{% trans 'Подписаться' %}</a>-->
-<!--        {% endif %}-->
-<!--    {% endfor %}</p>-->
-<!--    <p>Автор: {{ post.author }}</p>-->
-<!--</div>-->
-
-<!-- <form method="POST">-->
-<!--     {% csrf_token %}-->
-<!--     {{ form }}-->
-<!--     <input type="submit" value="{% trans 'Добавить' %}">-->
-<!-- </form>-->
+        </div>
+    </div>
 {% endblock content %}
 
 

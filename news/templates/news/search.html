@@ -5,29 +5,51 @@
 
 
 {% block navigation %}
-<li class="nav-item"><a class="nav-link" href="{% url 'news_list' %}">{% trans 'Новости' %}</a></li>
+    <li class="nav-item"><a class="nav-link" href="{% url 'news_list' %}">{% trans 'Новости' %}</a></li>
 {% endblock navigation%}
 
 
 {% block content %}
-<h4> {% trans 'Количество всех новостей' %}: {{ filter.qs | length }}</h4>
-<form method="GET">
-    {% csrf_token %}
-    <table>
-        <tr>
-            <td>{{ filter.form }}</td>
-        </tr>
-    </table>
-    <input type="submit" value="{% trans 'Найти' %}"/>
-</form>
+    <div class="row mb-2">
+        <div class="col-md-12">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow h-md-250 position-relative">
+                <div class="col p-2 d-flex flex-column position-static">
+                    <div class="row p-3">
+                        <div class="col-6">
+                            <h4> {% trans 'Количество всех новостей' %}: {{ filter.qs | length }}</h4>
+                        </div>
+                        <hr>
+                        <form method="GET">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-4 p-0 mb-auto">
+                                   {{ filter.form.date_time.label_tag }} {{ filter.form.date_time }}
+                                </div>
+                                <div class="col-5 p-0">
+                                    {{ filter.form.title.label_tag }} {{ filter.form.title }}
+                                </div>
+                                <div class="col-2 p-0 width">
+                                    {{ filter.form.author.label_tag }} {{ filter.form.author }}
+                                </div>
+                                <div class="col-1 p-0 width">
+                                    <input type="submit" value="{% trans 'Найти' %}"/>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-{% if filter.qs|length %}
-    {% for post in filter.qs %}
-        <a href="{{ post.get_absolute_url }}" target="_blank">{{ post.text }}</a>
-        <br>
-    {% endfor %}
-{% else %}
-    <p>{% trans 'Ничего не найдено' %}</p>
-{% endif %}
+
+    {% if filter.qs|length %}
+        {% for post in filter.qs %}
+            <a href="{{ post.get_absolute_url }}" target="_blank">{{ post.text }}</a>
+            <br>
+        {% endfor %}
+    {% else %}
+        <p>{% trans 'Ничего не найдено' %}</p>
+    {% endif %}
 
 {% endblock content %}

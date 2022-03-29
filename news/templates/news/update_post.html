@@ -9,26 +9,31 @@
 {% block content %}
     <form method="POST">
         {% csrf_token %}
+        <div class="row justify-content-center">
+            <div class="col-1">
+
+            </div>
+            <div class="col-6">
         <div class="container border shadow">
             <div class="row mt-3">
-                <div class="col-2">{{ form.choices.label_tag }}</div>
-                <div class="col-10">{{ form.choices }}</div>
+                <div class="col-3">{{ form.choices.label_tag }}</div>
+                <div class="col-9">{{ form.choices }}</div>
             </div>
             <div class="row mt-3">
-                <div class="col-2">{{ form.category.label_tag }}</div>
-                <div class="col-10">{{ form.category }}</div>
+                <div class="col-3">{{ form.category.label_tag }}</div>
+                <div class="col-9">{{ form.category }}</div>
             </div>
             <div class="row mt-3">
-                <div class="col-2">{{ form.title.label_tag }}</div>
-                <div class="col-10">{{ form.title }}</div>
+                <div class="col-3">{{ form.title.label_tag }}</div>
+                <div class="col-9">{{ form.title }}</div>
             </div>
             <div class="row mt-3">
-                <div class="col-2">{{ form.text.label_tag }}</div>
-                <div class="col-10">{{ form.text }}</div>
+                <div class="col-3">{{ form.text.label_tag }}</div>
+                <div class="col-9">{{ form.text }}</div>
             </div>
             <div class="row mb-3 mt-3">
-                <div class="col text-end">
-                    <input type="submit" value="{% trans 'Сохранить' %}">
+                <div class="col text-center">
+                    <input type="submit" value="{% trans 'Сохранить' %}" class="btn btn-secondary btn-small">
                 </div>
             </div>
         </div>
