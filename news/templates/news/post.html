@@ -33,8 +33,8 @@
                                     <a class="btn btn-secondary btn-sm" href="{% url 'update_post' post.id %}" role="button">{% trans 'Редактировать' %}</a>
                                     <a class="btn btn-secondary btn-sm" href="{% url 'delete_post' post.id %}" role="button">{% trans 'Удалить' %}</a>
                                     {% if subscriber %}
-                                        <p>{% trans 'Вы подписаны на эту категорию новостей' %}
-                                            <a class="btn btn-primary btn-sm" href="{% url 'unsubscribe' post.id %}" role="button">{% trans 'Отписаться' %}</a></p>
+{#                                        <p>{% trans 'Вы подписаны на эту категорию новостей' %}#}
+                                            <a class="btn btn-secondary btn-sm" href="{% url 'unsubscribe' post.id %}" role="button">{% trans 'Отписаться' %}</a></p>
                                     {% else %}
                                         <a class="btn btn-secondary btn-sm" href="{% url 'subscribe' post.id %}" role="button">{% trans 'Подписаться' %}</a>
                                     {% endif %}

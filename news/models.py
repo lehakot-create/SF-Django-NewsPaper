@@ -57,7 +57,8 @@ class Post(models.Model):
     title = models.CharField(max_length=255, unique=True, verbose_name='Заголовок')
     text = models.TextField(max_length=255, verbose_name='Текст новости')
     rating = models.IntegerField(default=0, verbose_name='Рейтинг')
-    url = models.URLField(verbose_name='Адрес')
+    # url = models.URLField(verbose_name='Адрес')
+    url = models.CharField(max_length=512, verbose_name='Адрес')
 
     def like(self):
         self.rating += 1

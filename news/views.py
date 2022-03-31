@@ -17,7 +17,7 @@ from rest_framework.response import Response
 from .tasks import send_email
 from .filters import PostFilter
 from .forms import PostForm, CommentForm, UserProfileForm
-from .models import Post, Comment, Category, Author
+from .models import Post, Comment, Category, Author, CategorySubscribers
 from .serializers import NewsSerializer
 
 
@@ -223,6 +223,9 @@ class ProfileDetailView(UpdateView):
         if self.request.user.id == self.kwargs.get('pk'):
             context = super().get_context_data(**kwargs)
             context['profile'] = User.objects.get(id=self.kwargs.get('pk'))
+            category = CategorySubscribers.objects.filter(subscribers_id=self.kwargs.get('pk'))
+            print(category.values('category_id'))
+            context['category'] = CategorySubscribers.objects.filter(subscribers_id=self.kwargs.get('pk'))
         else:
             raise Http404('Данная страница вам не доступна')
         return context

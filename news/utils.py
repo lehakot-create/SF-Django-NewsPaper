@@ -473,12 +473,12 @@ class Parser:
 
 
 def run_parser():
-    lst_obj = [Neftegaz(), Angi()]  # ,  Ria()]
+    lst_obj = [Neftegaz(), Angi()] # ,  Ria()]
     #### Guardinfo(), Sarnovosti(), Ufa1(), Fourvsar(), Kurgan45()
     #Tatar_inform(), Ria56(), Ch74()
     # lst_parser = []
     # lst_obj = [ex.Fourvsar()]
-    # lst_obj = []
+    # lst_obj = [Angi()]
     for obj in lst_obj:
         try:
             Parser(obj).parse()

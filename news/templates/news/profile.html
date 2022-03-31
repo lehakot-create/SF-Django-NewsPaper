@@ -35,4 +35,7 @@
             </div>
         </div>
     </form>
+    {% for cat in category %}
+    {{ cat.category_id }}
+    {% endfor %}
 {% endblock content %}
