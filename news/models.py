@@ -54,7 +54,7 @@ class Post(models.Model):
     choices = models.CharField(max_length=7, choices=choice, default=article, verbose_name='Тип')
     date_time = models.DateTimeField(auto_now_add=True, verbose_name='Дата')  # (blank=True, null=True)
     category = models.ManyToManyField('Category', through='PostCategory')
-    title = models.CharField(max_length=255, unique=True, verbose_name='Заголовок')
+    title = models.CharField(max_length=255, verbose_name='Заголовок')
     text = models.TextField(max_length=255, verbose_name='Текст новости')
     rating = models.IntegerField(default=0, verbose_name='Рейтинг')
     # url = models.URLField(verbose_name='Адрес')

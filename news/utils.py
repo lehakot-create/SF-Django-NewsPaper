@@ -32,9 +32,7 @@ class Neftegaz:
         all_news = soup.find('div', class_='js-ajax-content').find_all('div', class_='news_week__item')
         lst = []
         for news in all_news:
-            # date_time = news.find('div', class_='date').text
             date_time = EditDate.edit_date(news.find('div', class_='date').text)
-            # category = news.find('div', class_='category_link').text.replace('\n', '')
             title = news.find('div', class_='title').text
             url = news.find('div', class_='title').find('a').get('href')
             lst.append([date_time, 'neftegaz.ru', title, url])
@@ -473,8 +471,8 @@ class Parser:
 
 
 def run_parser():
-    lst_obj = [Neftegaz(), Angi(), Ch74(), Ria56()]
-    #### Guardinfo(), Sarnovosti(), Ufa1(), Fourvsar(), Kurgan45() Ria()]
+    lst_obj = [Neftegaz(), Angi(), Ch74(), Ria56(), Kurgan45()]
+    #### Guardinfo(), Sarnovosti(), Ufa1(), Fourvsar(),  Ria()]
     #Tatar_inform(), Ria56()
     # lst_parser = []
     # lst_obj = [ex.Fourvsar()]
