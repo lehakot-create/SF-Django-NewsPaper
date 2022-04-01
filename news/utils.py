@@ -199,12 +199,13 @@ class Ufa1:
 
                 soup = BeautifulSoup(data, 'lxml')
                 all_article = soup.find_all('article')
+                # print(all_article)
 
                 for article in all_article:
                     date_time = article.find('time').get('datetime')
                     date_time = f"{datetime.strptime(date_time[:10], '%Y-%m-%d').date().strftime('%d.%m.%Y')} {date_time[11:]}"
-                    title = article.find('h2', class_='G1ez').find('a').text
-                    url = f"https://ufa1.ru{article.find('h2', class_='G1ez').find('a').get('href')}"
+                    title = article.find('h2').find('a').text
+                    url = f"https://ufa1.ru{article.find('h2').find('a').get('href')}"
                     lst.append([date_time, 'ufa1', title, url])
 
             except ConnectionError:
@@ -472,11 +473,11 @@ class Parser:
 
 def run_parser():
     lst_obj = [Neftegaz(), Angi(), Ch74(), Ria56(), Kurgan45()]
-    #### Guardinfo(), Sarnovosti(), Ufa1(), Fourvsar(),  Ria()]
+    #### Guardinfo(), Sarnovosti(), , Fourvsar(),  Ria()]
     #Tatar_inform(), Ria56()
     # lst_parser = []
     # lst_obj = [ex.Fourvsar()]
-    # lst_obj = []
+    # lst_obj = [Ufa1()]
     for obj in lst_obj:
         try:
             Parser(obj).parse()
