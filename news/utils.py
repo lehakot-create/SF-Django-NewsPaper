@@ -79,12 +79,14 @@ class Guardinfo:
                 soup = BeautifulSoup(data, 'lxml')
                 all_id = soup.find_all('article')
                 for id_ in all_id:
-                    date_time = id_.find('time').text
+                    date_time = id_.find('time').get('datetime')
+                    date_time = datetime.strptime(f'{date_time[:10]} {date_time[11:19]}', '%Y-%m-%d %H:%M:%S')\
+                        .strftime('%d.%m.%Y %H:%M')
                     url = id_.find('h2', class_='entry-title').find('a').get('href')
                     title = id_.find('h2', class_='entry-title').find('a').text
-                    lst.append([date_time, 'guardinfo.online', title, url])
+                    lst.append([date_time, 'Guardinfo', title, url])
             except ConnectionError:
-                print(f'guardinfo.online: Соединение разорвано')
+                print(f'Guardinfo: Соединение разорвано')
             time.sleep(randint(5, 10))
         return lst
 
@@ -451,11 +453,11 @@ class Parser:
             'ria56': 6,
             'Tatar_inform': 8,
             'ufa1': 9,
-            'sarnovosti.ru': 7
+            'sarnovosti.ru': 7,
+            'Guardinfo': 10
         }
 
         for el in lst:
-            # print(el[3])
             print(el)
             try:
                 post = Post.objects.get(url=el[3])
@@ -473,8 +475,9 @@ class Parser:
 
 
 def run_parser():
-    lst_obj = [Neftegaz(), Angi(), Ch74(), Ria56(), Kurgan45(), Ufa1(), Tatar_inform()]
-    #### Guardinfo(), Sarnovosti(), , Fourvsar(),  Ria()]
+    lst_obj = [Neftegaz(), Angi(), Ch74(), Ria56(),
+               Kurgan45(), Ufa1(), Tatar_inform(), Guardinfo()]
+    #### , Sarnovosti(), , Fourvsar(),  Ria()]
     #
     # lst_parser = []
     # lst_obj = [ex.Fourvsar()]
