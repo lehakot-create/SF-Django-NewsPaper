@@ -203,7 +203,7 @@ class Ufa1:
 
                 for article in all_article:
                     date_time = article.find('time').get('datetime')
-                    date_time = f"{datetime.strptime(date_time[:10], '%Y-%m-%d').date().strftime('%d.%m.%Y')} {date_time[11:]}"
+                    date_time = f"{datetime.strptime(date_time[:10], '%Y-%m-%d').date().strftime('%d.%m.%Y')} {date_time[11:-3]}"
                     title = article.find('h2').find('a').text
                     url = f"https://ufa1.ru{article.find('h2').find('a').get('href')}"
                     lst.append([date_time, 'ufa1', title, url])
@@ -245,7 +245,6 @@ class Tatar_inform:
                             date_time = f"{datetime.strptime(f'{time_[0]}{month[key]}{time_[2]}', '%d.%m.%Y').date().strftime('%d.%m.%Y')} {time_[3]}"
                     title = li.find('div', class_='list-item__content').find('a').text.strip()
                     url = li.find('div', class_='list-item__content').find('a').get('href')
-                    # print(url)
                     lst.append([date_time, 'Tatar_inform', title, url])
 
             except ConnectionError:
@@ -468,24 +467,24 @@ class Parser:
                                     text=el[2],
                                     url=el[3])
                 post.category.add(Category.objects.get(id=category_id[el[1]]))
-                post.date_time = f"{datetime.strptime(el[0], '%d.%m.%Y %H:%M:%S')}.309298"
+                post.date_time = f"{datetime.strptime(el[0], '%d.%m.%Y %H:%M')}.309298"
                 post.save()
                 print(f'Create record: {post.id}-{post.title}')
 
 
 def run_parser():
-    # lst_obj = [Neftegaz(), Angi(), Ch74(), Ria56(), Kurgan45()]
+    lst_obj = [Neftegaz(), Angi(), Ch74(), Ria56(), Kurgan45(), Ufa1()]
     #### Guardinfo(), Sarnovosti(), , Fourvsar(),  Ria()]
-    #Tatar_inform()
+    # Tatar_inform()
     # lst_parser = []
     # lst_obj = [ex.Fourvsar()]
-    lst_obj = [Ufa1()]
+    # lst_obj = [Ufa1()]
     for obj in lst_obj:
-        Parser(obj).parse()
-        # try:
-        #     Parser(obj).parse()
-        # except:
-        #     print(f'Error-{obj.name}')
+        try:
+            Parser(obj).parse()
+        except:
+            print(f'Error-{obj.name}')
+            Logger.write_log(obj.name)
 
 
 # py manage.py shell
