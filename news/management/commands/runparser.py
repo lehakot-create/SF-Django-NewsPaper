@@ -9,6 +9,6 @@ class Command(BaseCommand):
         try:
             run_parser()
             self.stdout.write(self.style.SUCCESS(
-                f'Succesfully parsing news'))
+                f'Successfully parsing news'))
         except BaseException as e:
             self.stdout.write(self.style.ERROR(f'Error: {e}'))

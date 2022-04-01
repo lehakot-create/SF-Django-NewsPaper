@@ -456,9 +456,11 @@ class Parser:
         }
 
         for el in lst:
-            print(el[3])
+            # print(el[3])
+            print(el)
             try:
                 post = Post.objects.get(url=el[3])
+                print(f'Already exists {post.title}')
             except Post.DoesNotExist:
                 post = Post.objects.create(author=Author.objects.get(id=1),
                                     choices='News',
@@ -466,23 +468,24 @@ class Parser:
                                     text=el[2],
                                     url=el[3])
                 post.category.add(Category.objects.get(id=category_id[el[1]]))
-                post.date_time = f"{datetime.strptime(el[0], '%d.%m.%Y %H:%M')}.309298"
+                post.date_time = f"{datetime.strptime(el[0], '%d.%m.%Y %H:%M:%S')}.309298"
                 post.save()
                 print(f'Create record: {post.id}-{post.title}')
 
 
 def run_parser():
-    lst_obj = [Neftegaz(), Angi(), Ch74(), Ria56(), Kurgan45()]
+    # lst_obj = [Neftegaz(), Angi(), Ch74(), Ria56(), Kurgan45()]
     #### Guardinfo(), Sarnovosti(), , Fourvsar(),  Ria()]
-    #Tatar_inform(), Ria56()
+    #Tatar_inform()
     # lst_parser = []
     # lst_obj = [ex.Fourvsar()]
-    # lst_obj = [Ufa1()]
+    lst_obj = [Ufa1()]
     for obj in lst_obj:
-        try:
-            Parser(obj).parse()
-        except AttributeError as e:
-            print(e)
+        Parser(obj).parse()
+        # try:
+        #     Parser(obj).parse()
+        # except:
+        #     print(f'Error-{obj.name}')
 
 
 # py manage.py shell
